@@ -25,13 +25,18 @@ export class AddInvoiceComponent implements OnInit, OnDestroy {
     users: User[];
     aircrafts: Aircraft[];
     cfis: User[];
-    discountList = ['Mechanic Special', 'No Insurance', 'Discovery Flight'];
+    discounts = [
+        { name: 'Mechanic Special', code: 'mech' },
+        { name: 'Instructor', code: 'inst' },
+        { name: 'Discovery Flight', code: 'disc' },
+    ];
 
     selected = {
         pilot: null,
         aircraft: null,
         cfi: null,
         date: moment().format('YYYY-MM-DD'),
+        discount: null,
     };
 
     flight = {
@@ -48,11 +53,6 @@ export class AddInvoiceComponent implements OnInit, OnDestroy {
         name: null,
         cost: null,
         qty: null,
-    };
-
-    discount = {
-        name: null,
-        cost: null,
     };
 
     invoice: Invoice;
@@ -134,6 +134,16 @@ export class AddInvoiceComponent implements OnInit, OnDestroy {
         let total = 0;
         this.invoice.items.forEach((item) => {
             total += item.rate * item.quantity;
+        });
+        return total;
+    }
+
+    totalInstructorCost() {
+        let total = 0;
+        this.invoice.items.forEach((item) => {
+            if (item.name.includes('Instruction')) {
+                total += item.rate * item.quantity;
+            }
         });
         return total;
     }
@@ -230,12 +240,37 @@ export class AddInvoiceComponent implements OnInit, OnDestroy {
     }
 
     onAddDiscount() {
-        this.invoice.items.push({
-            name: this.discount.name,
-            rate: this.discount.cost * -1,
-            quantity: 1,
+        // Remove any others...
+        this.invoice.items = this.invoice.items.filter((i) => {
+            if (!i.name.includes('Discount:')) {
+                return i;
+            }
         });
-        this.discount.name = null;
-        this.discount.cost = null;
+
+        // Apply new discount
+        if (this.selected.discount) {
+            const name = this.selected.discount.name;
+            const code = this.selected.discount.code;
+
+            let amt = 0;
+            if (code === 'mech') {
+                amt = this.totalInvoice();
+            }
+
+            if (code === 'inst') {
+                amt = this.totalInstructorCost();
+            }
+
+            if (code === 'disc') {
+                const tot = this.totalInvoice();
+                amt = tot - 50;
+            }
+
+            this.invoice.items.push({
+                name: 'Discount: ' + name,
+                rate: amt * -1,
+                quantity: 1,
+            });
+        }
     }
 }

@@ -80,8 +80,6 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Flight</label>
@@ -111,8 +109,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Ground</label>
@@ -133,8 +129,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Other</label>
@@ -166,6 +160,32 @@
                             type="button"
                             value="Add"
                             (click)="validOther() && onAddOther()"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Discount</label>
+                    <div class="input-group">
+                        <select
+                            class="form-control"
+                            name="discount"
+                            [(ngModel)]="selected.discount"
+                        >
+                            <option [ngValue]="null">None</option>
+                            <option
+                                [ngValue]="discount"
+                                *ngFor="let discount of discounts"
+                            >
+                                {{ discount.name }}
+                            </option>
+                        </select>
+                        <input
+                            class="btn btn-default form-control"
+                            type="button"
+                            value="Add"
+                            (click)="onAddDiscount()"
                         />
                     </div>
                 </div>
