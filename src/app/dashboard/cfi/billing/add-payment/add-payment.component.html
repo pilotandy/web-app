@@ -1,0 +1,63 @@
+<div class="modal-header">Add Payment</div>
+<div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Pilot</label>
+                    <select
+                        class="form-control"
+                        name="pilot"
+                        [(ngModel)]="pilot"
+                    >
+                        <option [ngValue]="null">Choose Pilot...</option>
+                        <option [ngValue]="user" *ngFor="let user of users">
+                            {{ user.firstname }}
+                            {{ user.lastname }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Date</label>
+                    <div class="input-group">
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="date"
+                            [ngModel]="payment.date | date: 'yyyy-MM-dd'"
+                            (ngModelChange)="payment.date = $event"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Amount</label>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="amount"
+                            [(ngModel)]="payment.amount"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary float-right" (click)="onCancel()">
+        Cancel
+    </button>
+    <button
+        class="btn btn-outline-primary float-right"
+        [ngClass]="validPayment() ? '' : 'disabled'"
+        (click)="validPayment() && onSavePayment()"
+    >
+        Save
+        <app-waiting [state]="stateSave"></app-waiting>
+    </button>
+</div>

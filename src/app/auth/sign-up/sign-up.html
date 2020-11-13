@@ -1,0 +1,160 @@
+<div class="authentication">
+    <div class="sign-up">
+        <div class="row no-mrg-horizon">
+            <div class="col-md-4 no-pdd-horizon d-none d-md-block">
+                <div
+                    class="full-height bg"
+                    style="
+                        background-image: url('assets/images/others/sunset.jpg');
+                    "
+                >
+                    <div class="full-height pdd-horizon-70">
+                        <div class="table-cell">
+                            <div class="row">
+                                <div class="mr-auto ml-auto col-md-10">
+                                    <div class="text-right">
+                                        <img
+                                            class="img-responsive mrg-left-auto"
+                                            src="assets/images/logo/logo-white.png"
+                                            alt=""
+                                            width="170"
+                                            style="margin-top: 70px;"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 bg-white no-pdd-horizon">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="full-height height-100">
+                            <div
+                                class="vertical-align full-height pdd-horizon-70"
+                            >
+                                <div class="table-cell">
+                                    <div class="pdd-horizon-15">
+                                        <h1 class="mrg-btm-30">
+                                            Create Your account
+                                        </h1>
+                                        <form
+                                            [formGroup]="registerForm"
+                                            (ngSubmit)="onRegister()"
+                                        >
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 col-form-label"
+                                                    >Email</label
+                                                >
+                                                <div class="col-sm-9">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        name="email"
+                                                        formControlName="email"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 col-form-label"
+                                                    >Password</label
+                                                >
+                                                <div class="col-sm-9">
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        name="password"
+                                                        id="password"
+                                                        formControlName="password"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 col-form-label"
+                                                    >Confirm Password</label
+                                                >
+                                                <div class="col-sm-9">
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        name="confirm_password"
+                                                        id="confirm_password"
+                                                        formControlName="confirmPassword"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 col-form-label"
+                                                    >First Name</label
+                                                >
+                                                <div class="col-sm-9">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        name="first_name"
+                                                        id="first_name"
+                                                        formControlName="firstname"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-sm-3 col-form-label"
+                                                    >Last Name</label
+                                                >
+                                                <div class="col-sm-9">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        name="last_name"
+                                                        id="last_name"
+                                                        formControlName="lastname"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <p
+                                                class="text-danger"
+                                                *ngIf="error"
+                                            >
+                                                {{ error }}
+                                            </p>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-secondary"
+                                                        [disabled]="!registerForm.valid"
+                                                    >
+                                                        Register
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <p>
+                                            Already have an account?
+                                            <a
+                                                href=""
+                                                [routerLink]="['/auth/sign-in']"
+                                                >Sign In</a
+                                            >
+                                        </p>
+                                        <hr />
+                                        <small
+                                            >By signing up you agree to our
+                                            <a href="">Terms & Policy</a></small
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

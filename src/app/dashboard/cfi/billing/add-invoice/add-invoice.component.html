@@ -1,0 +1,224 @@
+<div class="modal-header">Add Invoice</div>
+<div class="modal-body">
+    <form role="form" id="form-validation" novalidate="novalidate">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Pilot</label>
+                    <select
+                        class="form-control"
+                        name="pilot"
+                        [(ngModel)]="selected.pilot"
+                    >
+                        <option [ngValue]="null">Choose Pilot...</option>
+                        <option [ngValue]="user" *ngFor="let user of users">
+                            {{ user.firstname }}
+                            {{ user.lastname }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <div class="input-group">
+                        <input
+                            name="desc"
+                            class="form-control"
+                            [(ngModel)]="invoice.description"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Date</label>
+                    <div class="input-group">
+                        <input
+                            name="date"
+                            class="form-control"
+                            [(ngModel)]="selected.date"
+                            type="date"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Aircraft</label>
+                    <select
+                        class="form-control"
+                        name="aircraft"
+                        [(ngModel)]="selected.aircraft"
+                    >
+                        <option [ngValue]="null">Choose Aircraft...</option>
+                        <option
+                            [ngValue]="aircraft"
+                            *ngFor="let aircraft of aircrafts"
+                        >
+                            {{ aircraft.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Instructor</label>
+                    <select
+                        class="form-control"
+                        name="cfi"
+                        [(ngModel)]="selected.cfi"
+                    >
+                        <option [ngValue]="null">Choose Instructor...</option>
+                        <option
+                            [ngValue]="instructor"
+                            *ngFor="let instructor of cfis"
+                        >
+                            {{ instructor.firstname }}
+                            {{ instructor.lastname }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Flight</label>
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            type="number"
+                            name="fqty"
+                            [(ngModel)]="flight.qty"
+                            placeholder="Hours"
+                        />
+                        <input
+                            class="form-control"
+                            [ngClass]="
+                                flight.dual ? 'btn-success' : 'btn-default'
+                            "
+                            type="button"
+                            (click)="onToggleDual()"
+                            value="Dual"
+                        />
+                        <input
+                            class="form-control"
+                            type="button"
+                            value="Add"
+                            (click)="validFlight() && onAddFlight()"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Ground</label>
+                    <div class="input-group my-group">
+                        <input
+                            class="form-control"
+                            type="number"
+                            name="gqty"
+                            [(ngModel)]="ground.qty"
+                            placeholder="Hours"
+                        />
+                        <input
+                            class="form-control"
+                            type="button"
+                            value="Add"
+                            (click)="validGround() && onAddGround()"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Other</label>
+
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="name"
+                            [(ngModel)]="other.name"
+                            placeholder="Description"
+                        />
+                        <input
+                            class="form-control"
+                            type="number"
+                            name="cost"
+                            [(ngModel)]="other.cost"
+                            placeholder="Cost"
+                        />
+                        <input
+                            class="form-control"
+                            type="number"
+                            name="oqty"
+                            [(ngModel)]="other.qty"
+                            placeholder="Quantity"
+                        />
+                        <input
+                            class="btn btn-default form-control"
+                            type="button"
+                            value="Add"
+                            (click)="validOther() && onAddOther()"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form>
+        <div *ngIf="invoice.items.length">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of invoice.items; let i = index">
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.rate | currency }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.rate * item.quantity | currency }}</td>
+                        <td>
+                            <i class="ti-trash" (click)="onRemoveItem(i)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ totalInvoice() | currency }}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary float-right" (click)="onCancel()">
+        Cancel
+    </button>
+    <button
+        class="btn btn-outline-primary float-right"
+        [ngClass]="validInvoice() ? '' : 'disabled'"
+        (click)="validInvoice() && onSaveInvoice()"
+    >
+        Save
+        <app-waiting [state]="stateSave"></app-waiting>
+    </button>
+</div>

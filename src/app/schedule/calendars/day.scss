@@ -1,0 +1,150 @@
+.cal {
+    position: relative;
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.day-table {
+    width: 100%;
+    display: grid;
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr;
+    grid-template-rows: repeat(auto-fill);
+
+    .time {
+        display: inline-block;
+        width: 50px;
+        padding-left: 5px;
+    }
+
+    .resource-hdr {
+        display: inline-block;
+        font-weight: bold;
+        padding-left: 10px;
+    }
+
+    .resource {
+        display: inline-block;
+        position: relative;
+        border-left: 1px dashed $default-dark;
+    }
+
+    .hour {
+        border-top: 1px solid $default-dark;
+    }
+
+    .half-hour {
+        border-top: 1px solid lighten($color: $default-dark, $amount: 50%);
+    }
+
+    .busy {
+        background-color: #eeeeee;
+    }
+}
+
+.events {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    .event {
+        position: absolute;
+        box-sizing: border-box;
+        color: black;
+        padding: 0px 10px;
+        width: 150px;
+
+        .title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+            display: inline-block;
+        }
+    }
+
+    .evt-begin {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .evt-end {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    // Red
+    .evt-color-0 {
+        border-right: 1px solid $default-danger;
+        border-left: 1px solid $default-danger;
+        background-color: $inverse-danger;
+    }
+
+    .evt-color-0.evt-begin {
+        border-top: 1px solid $default-danger;
+    }
+
+    .evt-color-0.evt-end {
+        border-bottom: 1px solid $default-danger;
+    }
+
+    // Yellow
+    .evt-color-1 {
+        border-right: 1px solid $default-warning;
+        border-left: 1px solid $default-warning;
+        background-color: $inverse-warning;
+    }
+
+    .evt-color-1.evt-begin {
+        border-top: 1px solid $default-warning;
+    }
+
+    .evt-color-1.evt-end {
+        border-bottom: 1px solid $default-warning;
+    }
+
+    // Green
+    .evt-color-2 {
+        border-right: 1px solid $default-success;
+        border-left: 1px solid $default-success;
+        background-color: $inverse-success;
+    }
+
+    .evt-color-2.evt-begin {
+        border-top: 1px solid $default-success;
+    }
+
+    .evt-color-2.evt-end {
+        border-bottom: 1px solid $default-success;
+    }
+
+    // Blue
+    .evt-color-3 {
+        border-right: 1px solid $default-info;
+        border-left: 1px solid $default-info;
+        background-color: $inverse-info;
+    }
+
+    .evt-color-3.evt-begin {
+        border-top: 1px solid $default-info;
+    }
+
+    .evt-color-3.evt-end {
+        border-bottom: 1px solid $default-info;
+    }
+
+    // Purple
+    .evt-color-4 {
+        border-right: 1px solid $default-primary;
+        border-left: 1px solid $default-primary;
+        background-color: $inverse-primary;
+    }
+
+    .evt-color-4.evt-begin {
+        border-top: 1px solid $default-primary;
+    }
+
+    .evt-color-4.evt-end {
+        border-bottom: 1px solid $default-primary;
+    }
+}

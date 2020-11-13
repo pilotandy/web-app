@@ -1,0 +1,34 @@
+<div
+    class="app header-dark side-nav-dark"
+    [ngClass]="{ 'is-collapsed': isCollapse, rtl: rtlActived }"
+>
+    <div class="layout" [ngClass]="headerSelected">
+        <div [ngClass]="sidenavSelected">
+            <!-- Side Nav START -->
+            <app-side-nav></app-side-nav>
+            <!-- Side Nav END -->
+
+            <!-- Page Container START -->
+            <div class="page-container">
+                <!-- Top Nav START -->
+                <app-header></app-header>
+                <!-- Top Nav END -->
+
+                <!-- Side Panel START -->
+                <app-side-panel></app-side-panel>
+                <!-- Side Panel END -->
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    <router-outlet></router-outlet>
+                </div>
+                <!-- Content Wrapper END -->
+
+                <!-- Footer START -->
+                <app-footer></app-footer>
+                <!-- Footer END -->
+            </div>
+            <!-- Page Container END -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<button
+    class="print-btn"
+    printSectionId="print-section"
+    [useExistingCss]="true"
+    ngxPrint
+>
+    <i class="ei-print"></i>
+</button>
+
+<div id="print-section" class="statement" *ngIf="user">
+    <img class="logo" src="../../assets/images/logo/logo-white.png" />
+    <div class="user">
+        Statement for: {{ user.firstname }} {{ user.lastname }}
+    </div>
+    <div class="balance">Account Balance: {{ calcBalance() | currency }}</div>
+    <div class="section">Invoices:</div>
+    <div *ngFor="let invoice of invoices" class="invoice">
+        <div class="date">{{ invoice.date | momentPipe: 'MM/DD/YYYY' }}</div>
+
+        <div class="item-header">
+            {{ invoice.description }}
+            <div class="tot">Subtotal</div>
+            <div class="rate">Rate</div>
+            <div class="qty">Qty</div>
+        </div>
+
+        <div class="items">
+            <ng-container *ngFor="let item of invoice.items">
+                <div class="tot">
+                    {{ item.quantity * item.rate | currency }}
+                </div>
+                <div class="rate">{{ item.rate | currency }}</div>
+                <div class="qty">{{ item.quantity | number: '1.1-1' }}</div>
+                <div class="name">{{ item.name }}</div>
+            </ng-container>
+        </div>
+        <div class="subtotal">{{ calcSubTotal(invoice) | currency }}</div>
+    </div>
+    <div class="grand-total">
+        <div class="title">Total</div>
+        <div class="amount">{{ calcGrandTotal() | currency }}</div>
+    </div>
+
+    <div class="section">Payments:</div>
+    <div *ngFor="let payment of payments" class="payment">
+        <div class="pay-date">
+            {{ payment.date | momentPipe: 'MM/DD/YYYY' }}
+        </div>
+        <div class="pay-amount">{{ payment.amount | currency }}</div>
+    </div>
+    <div class="grand-total">
+        <div class="title">Total</div>
+        <div class="amount">{{ calcGrandPayments() | currency }}</div>
+    </div>
+    <div class="section">Thank you!</div>
+</div>

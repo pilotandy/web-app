@@ -1,0 +1,18 @@
+<div class="row" *ngIf="notification">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <span class="float-right">
+                    {{ notification.date | date: 'medium' }}&nbsp;
+                    <a href="" [routerLink]="['../']">
+                        <i class="ti-close float-right"></i>
+                    </a>
+                </span>
+                {{ notification.title }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{notification.text}}</p>
+            </div>
+        </div>
+    </div>
+</div>

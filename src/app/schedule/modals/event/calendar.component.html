@@ -1,0 +1,59 @@
+<div class="cal-wrapper">
+    <span
+        class="form-control custom"
+        [innerHtml]="date | momentPipe: 'MMMM Do YYYY, h:mm a'"
+        (click)="showCalendar()"
+    ></span>
+    <div class="calendar" *ngIf="state.show">
+        <div class="calendar-header">
+            <div class="calendar-prev" (click)="subMonth()">
+                <i class="ei-left-chevron-circle"></i>
+            </div>
+            <div class="calendar-title">
+                {{ temp | momentPipe: 'MMMM YYYY' }}
+            </div>
+            <div class="calendar-next">
+                <div class="calendar-prev" (click)="addMonth()">
+                    <i class="ei-right-chevron-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="calendar-days">
+            <div class="cal-day name">Sun</div>
+            <div class="cal-day name">Mon</div>
+            <div class="cal-day name">Tue</div>
+            <div class="cal-day name">Wed</div>
+            <div class="cal-day name">Thu</div>
+            <div class="cal-day name">Fri</div>
+            <div class="cal-day name">Sat</div>
+            <div
+                *ngFor="let day of days"
+                [class]="'cal-day ' + day.class"
+                (click)="selectDay(day.date)"
+            >
+                {{ day.date | momentPipe: 'D' }}
+            </div>
+        </div>
+        <div class="calendar-time">
+            <div class="cal-time save" (click)="onSave()">
+                <i class="ei-checked"></i>
+            </div>
+            <div class="cal-time hour-prev" (click)="subHour()">
+                <i class="ei-left-chevron-2"></i>
+            </div>
+            <div class="cal-time min-prev" (click)="subMin()">
+                <i class="ei-left-chevron"></i>
+            </div>
+            <div class="cal-time time">{{ temp | momentPipe: 'hh:mm A' }}</div>
+            <div class="cal-time min-next" (click)="addMin()">
+                <i class="ei-right-chevron"></i>
+            </div>
+            <div class="cal-time hour-next" (click)="addHour()">
+                <i class="ei-right-chevron-2"></i>
+            </div>
+            <div class="cal-time cancel" (click)="onCancel()">
+                <i class="ei-unchecked"></i>
+            </div>
+        </div>
+    </div>
+</div>

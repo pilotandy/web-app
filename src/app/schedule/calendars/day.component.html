@@ -1,0 +1,46 @@
+<!-- <button class="btn" (click)="onClickRefresh()">refresh</button> -->
+
+<div class="cal">
+    <div class="day-table">
+        <span class="time"></span>
+        <span *ngFor="let res of resources" class="resource-hdr">
+            {{ res.name }}
+        </span>
+
+        <ng-container
+            *ngFor="let time of times"
+            [class]="isHour(time) ? 'hour' : 'half-hour'"
+        >
+            <span class="time hour" *ngIf="isHour(time)">{{
+                time | momentPipe: 'ha'
+            }}</span>
+            <span class="half-hour" *ngIf="!isHour(time)">&nbsp;</span>
+            <span
+                #cell
+                [attr.id]="time + ':' + res.id"
+                *ngFor="let res of resources"
+                [class]="
+                    (isHour(time) ? 'hour' : 'half-hour') +
+                    ' ' +
+                    (isAvailable(res.id, time) ? '' : 'busy')
+                "
+                class="resource"
+                (click)="onTimeClick(res.id, time)"
+            >
+            </span>
+        </ng-container>
+    </div>
+
+    <div class="events">
+        <ng-container *ngFor="let event of events">
+            <app-day-event
+                [event]="event"
+                [resource]="resource"
+                [cells]="cells"
+                [date]="date"
+                *ngFor="let resource of event.resourceIds"
+                (click)="onEditEvent(event)"
+            ></app-day-event>
+        </ng-container>
+    </div>
+</div>

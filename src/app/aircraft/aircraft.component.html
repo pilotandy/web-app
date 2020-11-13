@@ -1,0 +1,23 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div
+            class="col-sm-12 col-sm-6 col-md-4 col-lg-3"
+            *ngFor="let a of aircraft"
+        >
+            <div class="card mb-4">
+                <img
+                    class="card-img-top"
+                    [src]="
+                        '//cdn.pilotandy.com/aircraft/' +
+                        a.name +
+                        '/' +
+                        a.model.thumbnail
+                    "
+                />
+                <div class="card-body">
+                    {{ a.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

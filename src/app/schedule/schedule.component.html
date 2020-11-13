@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col order-1">
+            <div class="btn-group btn-group-sm" role="group">
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="onDatePrev()"
+                >
+                    &lt;
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="onDateToday()"
+                >
+                    Today
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="onDateNext()"
+                >
+                    &gt;
+                </button>
+            </div>
+        </div>
+
+        <div class="col order-3 order-sm-2 col-12 col-sm-auto">
+            <h4 class="text-center" *ngIf="calendar.view.selected === 'Day'">
+                {{ calendar.date | momentPipe: 'dddd MMMM D, YYYY' }}
+            </h4>
+            <h4 class="text-center" *ngIf="calendar.view.selected === 'Week'">
+                {{ startWeek() | momentPipe: 'MMMM D' }}
+                - {{ endWeek() | momentPipe: 'D, YYYY' }}
+            </h4>
+            <h4 class="text-center" *ngIf="calendar.view.selected === 'Month'">
+                {{ calendar.date | momentPipe: 'MMMM YYYY' }}
+            </h4>
+        </div>
+
+        <div class="col order-2 order-sm-3">
+            <div class="btn-group btn-group-sm float-right" role="group">
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    *ngFor="let view of calendar.view.options"
+                    (click)="calendar.view.click(view)"
+                    [class]="calendar.view.selected === view ? 'active' : ''"
+                >
+                    {{ view }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card app-schedule-full">
+                <app-calendar-day
+                    *ngIf="calendar.view.selected === 'Day'"
+                    [date]="calendar.date"
+                ></app-calendar-day>
+                <app-calendar-week
+                    *ngIf="calendar.view.selected === 'Week'"
+                ></app-calendar-week>
+                <app-calendar-month
+                    *ngIf="calendar.view.selected === 'Month'"
+                ></app-calendar-month>
+            </div>
+        </div>
+    </div>
+</div>

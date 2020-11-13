@@ -1,0 +1,117 @@
+.print-btn {
+    border: none;
+    background-color: transparent;
+    font-size: large;
+}
+
+.statement {
+    position: relative;
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+.logo {
+    display: block;
+}
+
+.user {
+    font-size: 1.3em;
+    padding: 1.2em 0px;
+    float: left;
+}
+
+.balance {
+    font-size: 1.3em;
+    padding: 1.2em 0px;
+    float: right;
+}
+
+.section {
+    clear: both;
+    padding: 10px 0px;
+    font-size: 1.2em;
+}
+
+.invoice {
+    position: relative;
+    clear: both;
+}
+
+.date {
+    width: 100px;
+    float: left;
+    padding: 5px 20px;
+    font-size: 1em;
+}
+
+.subtotal {
+    float: right;
+    padding: 5px 20px;
+    border-top: 1px solid #333;
+}
+
+.item-header {
+    padding: 5px 20px 5px 130px;
+    font-size: 1em;
+    border-bottom: 1px solid #333;
+}
+
+.items {
+    margin-left: 110px;
+    padding: 5px 20px;
+}
+
+.name {
+    clear: left;
+    text-align: left;
+}
+
+.qty {
+    float: right;
+    width: 50px;
+    text-align: left;
+}
+
+.rate {
+    float: right;
+    width: 50px;
+    text-align: left;
+}
+
+.tot {
+    float: right;
+    width: 150px;
+    text-align: right;
+}
+
+.grand-total {
+    clear: both;
+    border-top: 1px solid #333;
+    padding: 0px 20px;
+}
+
+.grand-total .title {
+    font-size: 1.1em;
+    padding: 1.2em 0px;
+    float: left;
+}
+
+.grand-total .amount {
+    font-size: 1.1em;
+    padding: 1.2em 0px;
+    float: right;
+}
+
+.payment {
+    padding: 0px 20px;
+    clear: both;
+}
+
+.pay-date {
+    float: left;
+}
+
+.pay-amount {
+    float: right;
+}

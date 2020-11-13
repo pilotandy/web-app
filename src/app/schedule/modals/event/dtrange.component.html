@@ -1,0 +1,9 @@
+<app-evt-calendar
+    [date]="start"
+    (changed)="onStartChanged($event)"
+></app-evt-calendar>
+<br />
+<app-evt-calendar
+    [date]="end"
+    (changed)="onEndChanged($event)"
+></app-evt-calendar>

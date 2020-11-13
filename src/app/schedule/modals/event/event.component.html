@@ -1,0 +1,127 @@
+<div class="modal-header">
+    Event
+    <button
+        *ngIf="event.id"
+        class="btn btn-outline-danger"
+        (click)="onDelete()"
+    >
+        Delete
+        <app-waiting [state]="stateDelete"></app-waiting>
+    </button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">What</label>
+            <div class="col-sm-10">
+                <input
+                    class="form-control"
+                    name="title"
+                    [(ngModel)]="event.title"
+                />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Who</label>
+            <div class="col-sm-10">
+                <select
+                    class="form-control"
+                    name="owner"
+                    [(ngModel)]="event.owner"
+                >
+                    <option *ngFor="let u of users" [ngValue]="u.id">
+                        {{ u.firstname + ' ' + u.lastname }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">When</label>
+            <div class="col-sm-10">
+                <app-dtrange
+                    [start]="event.start"
+                    [end]="event.end"
+                    (startChanged)="onStartChanged($event)"
+                    (endChanged)="onEndChanged($event)"
+                >
+                </app-dtrange>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Instructor</label>
+            <div class="col-sm-10">
+                <select
+                    class="form-control"
+                    name="instructor"
+                    [(ngModel)]="instructor"
+                >
+                    <option selected="selected" [ngValue]="null">
+                        Choose instructor...
+                    </option>
+                    <option *ngFor="let i of instructors" [ngValue]="i.id">
+                        {{ i.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Aircraft</label>
+            <div class="col-sm-10">
+                <select
+                    class="form-control"
+                    name="aircraft"
+                    [(ngModel)]="aircraft"
+                >
+                    <option selected="selected" [ngValue]="null">
+                        Choose aircraft...
+                    </option>
+                    <option *ngFor="let a of aircrafts" [ngValue]="a.id">
+                        {{ a.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Color</label>
+            <div class="col-sm-10">
+                <select
+                    class="form-control"
+                    name="color"
+                    [(ngModel)]="event.color"
+                >
+                    <option
+                        *ngFor="let c of colors; let i = index"
+                        [ngValue]="i"
+                    >
+                        {{ c }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div *ngIf="invalid" class="text-danger col-md-12">
+        There is a scheduling conflict for the times and resources selected.
+    </div>
+
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="onCancel()"
+    >
+        Cancel
+    </button>
+    <button
+        class="btn btn-outline-primary"
+        [ngClass]="valid() ? '' : 'disabled'"
+        (click)="valid() && onSave()"
+    >
+        Save
+        <app-waiting [state]="stateSave"></app-waiting>
+    </button>
+</div>

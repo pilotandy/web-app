@@ -1,0 +1,26 @@
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.settings {
+  text-decoration: none;
+  list-style: none;
+  padding: 0em;
+  margin: 0em;
+}
+
+.time {
+  position: relative;
+  padding-left: 2em;
+}
+
+.time .icon {
+  position: absolute;
+  left: 0.4em;
+  top: 0.3em;
+  font-size: 1.1em;
+}

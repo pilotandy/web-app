@@ -1,0 +1,67 @@
+<div class="side-nav" sideBar>
+    <div class="side-nav-inner">
+        <div class="side-nav-logo">
+            <a href="" [routerLink]="['/dashboard']">
+                <div
+                    class="logo logo-dark"
+                    style="
+                        background-image: url('assets/images/logo/logo.png');
+                    "
+                ></div>
+                <div
+                    class="logo logo-white"
+                    style="
+                        background-image: url('assets/images/logo/logo-white.png');
+                    "
+                ></div>
+            </a>
+            <div class="mobile-toggle side-nav-toggle">
+                <a (click)="toggleSideNavCollapse()" href="javascript:void(0);">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+            </div>
+        </div>
+        <ul class="side-nav-menu scrollable" [perfectScrollbar]>
+            <li clas="nav-item" routerLinkActive="active">
+                <a class="mrg-top-30" href="" [routerLink]="['/dashboard/']">
+                    <span class="icon-holder">
+                        <i class="lnr lnr-home3"></i>
+                    </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li clas="nav-item" routerLinkActive="active">
+                <a href="" [routerLink]="['/aircraft/']">
+                    <span class="icon-holder">
+                        <i class="lnr lnr-plane"></i>
+                    </span>
+                    <span class="title">Aircraft</span>
+                </a>
+            </li>
+            <li clas="nav-item" routerLinkActive="active">
+                <a href="" [routerLink]="['/schedule/']">
+                    <span class="icon-holder">
+                        <i class="lnr lnr-calendar-full"></i>
+                    </span>
+                    <span class="title">Schedule</span>
+                </a>
+            </li>
+            <li clas="nav-item" routerLinkActive="active">
+                <a href="" [routerLink]="['/school/']">
+                    <span class="icon-holder">
+                        <i class="lnr lnr-book2"></i>
+                    </span>
+                    <span class="title">School</span>
+                </a>
+            </li>
+            <li clas="nav-item" routerLinkActive="active">
+                <a href="" [routerLink]="['/planner/']">
+                    <span class="icon-holder">
+                        <i class="ti-map-alt"></i>
+                    </span>
+                    <span class="title">Flight Planner</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
