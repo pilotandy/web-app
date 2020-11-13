@@ -62,7 +62,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     (error) => {}
                 );
                 if (user) {
-                    this.doTheMath(user);
+                    this.activities = [];
+                    this.accounts = [];
+                    if (user.groups.includes('Flight Instructor')) {
+                        this.doTheBigMath();
+                    } else {
+                        this.doTheMath();
+                    }
                 }
             })
         );
@@ -74,11 +80,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    doTheMath(user) {
-        this.activities = [];
-        this.accounts = [];
+    doTheMath() {
         this.balance = 0;
-        user.invoices
+        this.user.invoices
             .sort((a: Invoice, b: Invoice) => {
                 if (moment(a.date) > moment(b.date)) {
                     return -1;
@@ -125,7 +129,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 this.balance += amt;
             });
 
-        user.payments.forEach((p) => {
+        this.user.payments.forEach((p) => {
             const account = {
                 date: moment(p.date),
                 title: 'Payment',
@@ -135,14 +139,71 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.balance -= p.amount;
         });
 
-        this.accounts.sort((a: Invoice, b: Invoice) => {
-            if (moment(a.date) > moment(b.date)) {
-                return -1;
-            } else if (moment(a.date) < moment(b.date)) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
+        this.accounts = this.accounts
+            .sort((a: Invoice, b: Invoice) => {
+                if (moment(a.date) > moment(b.date)) {
+                    return -1;
+                } else if (moment(a.date) < moment(b.date)) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            })
+            .slice(0, 5);
+    }
+
+    doTheBigMath() {
+        this.balance = 0;
+        this.subs.push(
+            this.userService.allUsers.subscribe((users: User[]) => {
+                if (users) {
+                    users.forEach((user: User) => {
+                        if (user !== this.user) {
+                            user.invoices
+                                .slice(0, 4) // Limit to 4
+                                .forEach((invc) => {
+                                    invc.items.forEach((i) => {
+                                        let sub = '';
+                                        if (
+                                            i.name.includes(
+                                                'Flight Instruction'
+                                            )
+                                        ) {
+                                            sub =
+                                                'Flight: ' +
+                                                Number(i.quantity)
+                                                    .toFixed(1)
+                                                    .toString();
+                                        }
+                                        if (sub !== '') {
+                                            const activity = {
+                                                date: moment(invc.date),
+                                                title: invc.description,
+                                                subtitle: sub,
+                                            };
+                                            this.activities.push(activity);
+                                        }
+                                    });
+                                });
+                        }
+                    });
+
+                    // do the the user...
+                    this.doTheMath();
+
+                    this.activities = this.activities
+                        .sort((a, b) => {
+                            if (moment(a.date) > moment(b.date)) {
+                                return -1;
+                            } else if (moment(a.date) < moment(b.date)) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        })
+                        .slice(0, 5);
+                }
+            })
+        );
     }
 }
