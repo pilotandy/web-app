@@ -34,20 +34,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     (events: CalendarEvent[]) => {
                         const now = moment();
                         this.events = [];
-                        events.forEach((e) => {
-                            const s = moment(e.start);
-                            if (
-                                this.user.id === e.owner ||
-                                (e.resourceIds.find(
-                                    (id) => this.user.id === id
-                                ) &&
-                                    s > now)
-                            ) {
-                                if (this.events.length < 10) {
-                                    this.events.push(e);
+                        events
+                            .sort((a: CalendarEvent, b: CalendarEvent) => {
+                                if (moment(a.start) < moment(b.start)) {
+                                    return -1;
+                                } else if (moment(a.start) > moment(b.start)) {
+                                    return 1;
+                                } else {
+                                    return 0;
                                 }
-                            }
-                        });
+                            })
+                            .forEach((e) => {
+                                const s = moment(e.start);
+                                if (
+                                    this.user.id === e.owner ||
+                                    (e.resourceIds.find(
+                                        (id) => this.user.id === id
+                                    ) &&
+                                        s > now)
+                                ) {
+                                    if (this.events.length < 10) {
+                                        this.events.push(e);
+                                    }
+                                }
+                            });
                     },
                     (error) => {}
                 );

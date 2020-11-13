@@ -17,12 +17,8 @@ export enum WaitState {
     selector: 'app-waiting',
     templateUrl: './waiting.component.html',
 })
-export class WaitingComponent implements OnInit, OnChanges {
+export class WaitingComponent implements OnInit {
     @Input() state: WaitState;
     constructor() {}
     ngOnInit() {}
-
-    ngOnChanges(changes: SimpleChanges) {
-        console.log(changes);
-    }
 }

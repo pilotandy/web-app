@@ -166,9 +166,7 @@ export class ScheduleService {
                     color: event.color,
                 },
             };
-            console.log(evnt);
             if (evnt.id) {
-                console.log('putting');
                 this.http.put('/api/event/' + evnt.id + '/', evnt).subscribe(
                     (e) => {
                         resolve();
@@ -178,7 +176,6 @@ export class ScheduleService {
                     }
                 );
             } else {
-                console.log('posting');
                 this.http.post('/api/event/', evnt).subscribe(
                     (e) => {
                         resolve();

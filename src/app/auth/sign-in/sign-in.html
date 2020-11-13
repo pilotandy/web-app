@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-4 no-pdd-horizon">
                 <div class="full-height bg-white height-100">
-                    <div class="vertical-align full-height pdd-horizon-70">
+                    <div class="vertical-align pdd-horizon-70">
                         <div class="table-cell">
                             <div class="pdd-horizon-15">
                                 <h2>Login</h2>
@@ -54,14 +54,26 @@
                                     <p class="text-danger" *ngIf="error">
                                         {{ error }}
                                     </p>
-                                    <button class="btn btn-info">
-                                        Login
-                                    </button>
+                                    <button class="btn btn-info">Login</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="login-footer">
+                    <div class="login-footer d-none d-md-block">
+                        <img
+                            class="img-responsive inline-block"
+                            src="assets/images/logo/logo.png"
+                            width="100"
+                            alt=""
+                        />
+                        <span class="font-size-13 pull-right pdd-top-10"
+                            >Don't have an account?
+                            <a href="" [routerLink]="['/auth/sign-up']"
+                                >Sign Up Now</a
+                            ></span
+                        >
+                    </div>
+                    <div class="login-header d-block d-md-none">
                         <img
                             class="img-responsive inline-block"
                             src="assets/images/logo/logo.png"

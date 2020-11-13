@@ -44,7 +44,9 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        value="Victoria Clayton"
+                                        [value]="
+                                            user.firstname + ' ' + user.lastname
+                                        "
                                     />
                                 </div>
                             </div>
@@ -57,7 +59,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mrg-top-10">
-                                        victoria93@gmail.com
+                                        {{ user.email }}
                                     </p>
                                 </div>
                             </div>
@@ -81,7 +83,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr />
+                            <!-- <hr />
                             <div class="row">
                                 <div class="col-md-3">
                                     <p class="mrg-top-10 text-dark">
@@ -111,11 +113,11 @@
                                         >
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-heading border bottom">
                             <h4 class="card-title">Notifications</h4>
                         </div>
@@ -234,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
