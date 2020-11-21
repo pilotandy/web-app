@@ -178,7 +178,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
                                         if (sub !== '') {
                                             const activity = {
                                                 date: moment(invc.date),
-                                                title: invc.description,
+                                                title:
+                                                    user.firstname +
+                                                    ' ' +
+                                                    user.lastname +
+                                                    ': ' +
+                                                    invc.description,
                                                 subtitle: sub,
                                             };
                                             this.activities.push(activity);
