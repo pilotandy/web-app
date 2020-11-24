@@ -159,37 +159,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 if (users) {
                     users.forEach((user: User) => {
                         if (user !== this.user) {
-                            user.invoices
-                                .slice(0, 4) // Limit to 4
-                                .forEach((invc) => {
-                                    invc.items.forEach((i) => {
-                                        let sub = '';
-                                        if (
-                                            i.name.includes(
-                                                'Flight Instruction'
-                                            )
-                                        ) {
-                                            sub =
-                                                'Flight: ' +
-                                                Number(i.quantity)
-                                                    .toFixed(1)
-                                                    .toString();
-                                        }
-                                        if (sub !== '') {
-                                            const activity = {
-                                                date: moment(invc.date),
-                                                title:
-                                                    user.firstname +
-                                                    ' ' +
-                                                    user.lastname +
-                                                    ': ' +
-                                                    invc.description,
-                                                subtitle: sub,
-                                            };
-                                            this.activities.push(activity);
-                                        }
-                                    });
+                            user.invoices.forEach((invc) => {
+                                invc.items.forEach((i) => {
+                                    let sub = '';
+                                    if (i.name.includes('Flight Instruction')) {
+                                        sub =
+                                            'Flight: ' +
+                                            Number(i.quantity)
+                                                .toFixed(1)
+                                                .toString();
+                                    }
+                                    if (sub !== '') {
+                                        const activity = {
+                                            date: moment(invc.date),
+                                            title:
+                                                user.firstname +
+                                                ' ' +
+                                                user.lastname +
+                                                ': ' +
+                                                invc.description,
+                                            subtitle: sub,
+                                        };
+                                        this.activities.push(activity);
+                                    }
                                 });
+                            });
                         }
                     });
 
