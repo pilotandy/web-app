@@ -10,6 +10,8 @@ import { NotifyService } from './shared/services/notify.service';
 import { CommonLayoutComponent } from './common/common-layout.component';
 import { AuthenticationLayoutComponent } from './common/authentication-layout.component';
 
+import { IntroComponent } from './common/intro.component';
+
 // Routing Module
 import { AppRoutes } from './app.routing';
 
@@ -42,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     declarations: [
         AppComponent,
         CommonLayoutComponent,
+        IntroComponent,
         AuthenticationLayoutComponent,
         AddInvoiceComponent,
         AddPaymentComponent,

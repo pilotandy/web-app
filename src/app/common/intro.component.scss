@@ -1,0 +1,62 @@
+.wrapper::before {
+    content: '';
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        url('../../assets/images/others/getpaid.jpg');
+
+    /* Add the blur effect */
+    //filter: blur(8px);
+    //-webkit-filter: blur(8px);
+
+    /* Positioning and Size */
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    height: calc(100vh - 125px);
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.content {
+    background: inherit;
+    position: relative;
+    width: 90%;
+    color: #333333;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: calc(100vh - 169px);
+    background: rgba(255, 255, 255, 0.5);
+    max-width: 768px;
+}
+
+.content > * {
+    padding-bottom: 20px;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    max-height: 150px;
+    max-width: 95%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333333;
+}
+
+.quote {
+    font-family: cursive;
+    font-size: 1.5em;
+}
+
+.contact {
+    font-size: 1.1em;
+}

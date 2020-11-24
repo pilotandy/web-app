@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { CommonLayoutComponent } from './common/common-layout.component';
 import { AuthenticationLayoutComponent } from './common/authentication-layout.component';
 import { AuthGuard } from './auth/auth.guard';
+import { IntroComponent } from './common/intro.component';
 
 export const AppRoutes: Routes = [
     {
@@ -57,6 +58,10 @@ export const AppRoutes: Routes = [
                     import('./planner/planner.module').then(
                         (m) => m.PlannerModule
                     ),
+            },
+            {
+                path: '',
+                component: IntroComponent
             },
         ],
     },
