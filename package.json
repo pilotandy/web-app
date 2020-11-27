@@ -1,6 +1,6 @@
 {
-    "name": "pilotandy_webapp",
-    "version": "1.0.0",
+    "name": "espire",
+    "version": "3.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
