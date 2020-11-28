@@ -12,12 +12,26 @@ import { AddPaymentComponent } from './billing/add-payment/add-payment.component
 })
 export class CFIComponent implements OnInit {
     @Input() user: User;
+    @Input() users: User[] = [];
 
     private subs: Subscription[] = [];
 
     constructor(private modalService: BsModalService) {}
 
     ngOnInit(): void {}
+
+    calcBalance(user: User) {
+        let balance = 0;
+        user.invoices.forEach((inv) => {
+            inv.items.forEach((i) => {
+                balance += i.quantity * i.rate;
+            });
+        });
+        user.payments.forEach((p) => {
+            balance -= p.amount;
+        });
+        return balance;
+    }
 
     addInvoice(): void {
         const invcRef = this.modalService.show(AddInvoiceComponent);

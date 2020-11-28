@@ -1,9 +1,7 @@
-import { retry, share, switchMap, takeUntil, map } from 'rxjs/operators';
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
-import { BehaviorSubject, interval, Observable, Subject, timer } from 'rxjs';
-import { nextTick } from 'process';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 export interface NotifyBackend {
     id: number;
@@ -19,6 +17,12 @@ export interface Notify {
     text: string;
     viewed: boolean;
     date: moment.Moment;
+}
+
+export interface NotifyType {
+    id: number;
+    sid: string;
+    name: string;
 }
 
 @Injectable()
@@ -48,6 +52,19 @@ export class NotifyService implements OnDestroy {
 
     ngOnDestroy() {
         this.stopPolling.next();
+    }
+
+    types() {
+        return new Promise<NotifyType[]>((resolve, reject) => {
+            this.http.get('/api/notify/types/').subscribe(
+                (nts: NotifyType[]) => {
+                    resolve(nts);
+                },
+                (err) => {
+                    reject(err);
+                }
+            );
+        });
     }
 
     get(id: string) {

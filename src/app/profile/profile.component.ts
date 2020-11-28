@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NotifyService, NotifyType } from '../shared/services/notify.service';
 import { User, UserService } from '../user/user.service';
 
 @Component({
@@ -13,9 +14,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     user: User;
     viewer: User;
 
+    notifyTypes: NotifyType[];
+
     constructor(
         private userService: UserService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private notifyService: NotifyService
     ) {}
 
     ngOnInit(): void {
@@ -44,6 +48,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 }
             })
         );
+
+        this.notifyService.types().then((types: NotifyType[]) => {
+            this.notifyTypes = types;
+        });
     }
 
     ngOnDestroy(): void {
@@ -65,36 +73,58 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     // convert image file to base64 string
                     const toSave = JSON.parse(JSON.stringify(this.user));
                     toSave.data.image = reader.result.toString();
-                    this.userService.saveUser(toSave).subscribe(
+                    this.userService.saveUser(toSave).then(
                         (user: User) => {
                             this.user = user;
                         },
-                        (error) => {
-                            alert('could not save the user!');
-                        }
+                        (error) => {}
                     );
                 },
                 false
             );
-            // load image
+
             if (file) {
                 reader.readAsDataURL(file);
             }
-
-            // formData.append('uploadFile', file, file.name);
-            // let headers = new Headers();
-            // /** In Angular 5, including the header Content-Type can invalidate your request */
-            // headers.append('Content-Type', 'multipart/form-data');
-            // headers.append('Accept', 'application/json');
-            // let options = new RequestOptions({ headers: headers });
-            // this.http
-            //     .post(`${this.apiEndPoint}`, formData, options)
-            //     .map((res) => res.json())
-            //     .catch((error) => Observable.throw(error))
-            //     .subscribe(
-            //         (data) => console.log('success'),
-            //         (error) => console.log(error)
-            //     );
         }
+    }
+
+    onChangePhone(phone) {
+        console.log(phone);
+    }
+
+    systemType() {
+        return {
+            email: false,
+            sms: false,
+        };
+    }
+
+    onEmailNotifyChange(systemId) {
+        const user = JSON.parse(JSON.stringify(this.user));
+        let n = user.notifications[systemId];
+        if (!n) {
+            n = this.systemType();
+        }
+        n.email = !n.email;
+        user.notifications[systemId] = n;
+
+        this.userService.saveUser(user).then((u: User) => {
+            this.user = u;
+        });
+    }
+
+    onSMSNotifyChange(systemId) {
+        const user = JSON.parse(JSON.stringify(this.user));
+        let n = user.notifications[systemId];
+        if (!n) {
+            n = this.systemType();
+        }
+        n.sms = !n.sms;
+        user.notifications[systemId] = n;
+
+        this.userService.saveUser(user).then((u: User) => {
+            this.user = u;
+        });
     }
 }

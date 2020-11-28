@@ -4,6 +4,7 @@
             <div *ngFor="let group of user.groups">
                 <app-dashboard-cfi
                     [user]="user"
+                    [users]="users"
                     *ngIf="group === 'Flight Instructor'"
                 ></app-dashboard-cfi>
                 <app-dashboard-ppl
@@ -39,7 +40,14 @@
                                 <a
                                     href=""
                                     class="title no-pdd-vertical text-semibold inline-block"
+                                    *ngIf="!user.groups.includes('Flight Instructor')"
                                     ><span>{{ event.title }}</span></a
+                                >
+                                <a
+                                    href=""
+                                    class="title no-pdd-vertical text-semibold inline-block"
+                                    *ngIf="user.groups.includes('Flight Instructor')"
+                                    ><span>User: {{ event.title }}</span></a
                                 >
                                 <span class="sub-title">
                                     <span

@@ -29,13 +29,10 @@ export interface User {
         presolo?: boolean;
         availability?: any[];
         image?: string;
-        notify?: {
-            email: boolean;
-            sms: boolean;
-        };
     };
     invoices: Invoice[];
     payments: Payment[];
+    notifications?: any;
 }
 
 @Injectable({
@@ -89,21 +86,26 @@ export class UserService {
     }
 
     public saveUser(user: User) {
-        return this.http.patch('/api/users/' + user.id + '/', user).pipe(
-            map((saved: User) => {
-                const users = this.allUsersSubject.value;
-                users.forEach((u: User) => {
-                    if (u.id === saved.id) {
-                        u = saved;
-                    }
-                });
-                this.allUsersSubject.next(users);
-                // if (this.currentUserSubject.value.id === saved.id) {
-                //     this.currentUserSubject.next(saved);
-                // }
-                return saved;
-            })
-        );
+        return new Promise<User>((resolve, reject) => {
+            this.http.patch('/api/users/' + user.id + '/', user).subscribe(
+                (saved: User) => {
+                    const users = this.allUsersSubject.value;
+                    users.forEach((u: User) => {
+                        if (u.id === saved.id) {
+                            u = saved;
+                        }
+                    });
+                    this.allUsersSubject.next(users);
+                    // if (this.currentUserSubject.value.id === saved.id) {
+                    //     this.currentUserSubject.next(saved);
+                    // }
+                    resolve(saved);
+                },
+                (err) => {
+                    reject(null);
+                }
+            );
+        });
     }
 
     private getAllUsers() {

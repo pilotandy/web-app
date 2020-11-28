@@ -110,8 +110,8 @@ export class AddInvoiceComponent implements OnInit, OnDestroy {
         this.stateSave = WaitState.wait;
         const user: User = JSON.parse(JSON.stringify(this.selected.pilot));
         user.invoices.push(this.invoice);
-        this.userService.saveUser(user).subscribe(
-            (u) => {
+        this.userService.saveUser(user).then(
+            (u: User) => {
                 this.stateSave = WaitState.success;
                 setTimeout(() => {
                     this.stateSave = WaitState.idle;

@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     user: User;
+    users: User[];
     events: CalendarEvent[];
     activities: any[];
     accounts: any[];
@@ -157,6 +158,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.subs.push(
             this.userService.allUsers.subscribe((users: User[]) => {
                 if (users) {
+                    this.users = users;
                     users.forEach((user: User) => {
                         if (user !== this.user) {
                             user.invoices.forEach((invc) => {

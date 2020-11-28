@@ -50,8 +50,8 @@ export class AddPaymentComponent implements OnInit {
         this.stateSave = WaitState.wait;
         const user: User = JSON.parse(JSON.stringify(this.pilot));
         user.payments.push(this.payment);
-        this.userService.saveUser(user).subscribe(
-            (u) => {
+        this.userService.saveUser(user).then(
+            (u: User) => {
                 this.stateSave = WaitState.success;
                 setTimeout(() => {
                     this.stateSave = WaitState.idle;

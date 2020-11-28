@@ -83,11 +83,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p class="mrg-top-10 text-dark">
+                                        <b>Phone</b>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        (change)="onChangePhone($event)"
+                                        [value]="user.data.phone"
+                                    />
+                                </div>
+                            </div>
                             <!-- <hr />
                             <div class="row">
                                 <div class="col-md-3">
                                     <p class="mrg-top-10 text-dark">
-                                        <b>Location</b>
+                                        <b>Phone Number</b>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
@@ -117,50 +132,123 @@
                         </div>
                     </div>
 
-                    <!-- <div class="card">
+                    <div class="card">
                         <div class="card-heading border bottom">
                             <h4 class="card-title">Notifications</h4>
                         </div>
                         <div class="card-block">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <ul class="list-unstyled list-info">
-                                        <li>
-                                            <span class="thumb-img pdd-top-10">
-                                                <i
-                                                    class="ti-user font-size-30"
-                                                ></i>
-                                            </span>
-                                            <div class="info">
-                                                <b
-                                                    class="text-dark font-size-16"
-                                                    >Everyone can look me up</b
-                                                >
-                                                <p>
-                                                    A Jedi can feel the Force
-                                                    flowing through him. You
-                                                    mean it controls your
-                                                    actions
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-2 text-right">
-                                    <div
-                                        class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            name="toggle1"
-                                            id="toggle1"
-                                            checked
-                                        />
-                                        <label for="toggle1"></label>
+                            <table>
+                                <tr>
+                                    <th style="width: 100%"></th>
+                                    <th>Email</th>
+                                    <th>Text</th>
+                                </tr>
+                                <tr
+                                    *ngFor="
+                                        let notifyType of notifyTypes;
+                                        let i = index
+                                    "
+                                >
+                                    <td>
+                                        <div class="info">
+                                            <b class="text-dark font-size-16">{{
+                                                notifyType.title
+                                            }}</b>
+                                            <p>
+                                                {{ notifyType.description }}
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                name="{{
+                                                    notifyType.sid
+                                                }}_eml_toggle"
+                                                id="{{
+                                                    notifyType.sid
+                                                }}_eml_toggle"
+                                                [checked]="
+                                                    user.notifications[
+                                                        notifyType.sid
+                                                    ] &&
+                                                    user.notifications[
+                                                        notifyType.sid
+                                                    ]['email'] === true
+                                                "
+                                                (change)="
+                                                    onEmailNotifyChange(
+                                                        notifyType.sid
+                                                    )
+                                                "
+                                            />
+                                            <label
+                                                for="{{
+                                                    notifyType.sid
+                                                }}_eml_toggle"
+                                            ></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                name="{{
+                                                    notifyType.sid
+                                                }}_sms_toggle"
+                                                id="{{
+                                                    notifyType.sid
+                                                }}_sms_toggle"
+                                                [checked]="
+                                                    user.notifications[
+                                                        notifyType.sid
+                                                    ] &&
+                                                    user.notifications[
+                                                        notifyType.sid
+                                                    ]['sms'] === true
+                                                "
+                                                (change)="
+                                                    onSMSNotifyChange(
+                                                        notifyType.sid
+                                                    )
+                                                "
+                                            />
+                                            <label
+                                                for="{{
+                                                    notifyType.sid
+                                                }}_sms_toggle"
+                                            ></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- <div
+                                class="row"
+                                *ngFor="
+                                    let notifyType of notifyTypes;
+                                    let i = index
+                                "
+                            >
+                                <div class="col-xs-10">
+                                    <div class="info">
+                                        <b class="text-dark font-size-16">{{
+                                            notifyType.title
+                                        }}</b>
+                                        <p>
+                                            {{ notifyType.description }}
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                            <hr />
+                                <div class="col-xs-2 text-right"></div>
+                                <div class="col-xs-2 text-right"></div>
+                            </div> -->
+                            <!-- <hr />
                             <div class="row">
                                 <div class="col-md-10">
                                     <ul class="list-unstyled list-info">
@@ -234,9 +322,9 @@
                                         <label for="toggle3"></label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
