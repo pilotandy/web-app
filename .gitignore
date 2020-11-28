@@ -47,3 +47,4 @@ Thumbs.db
 
 # Other
 /src/environments/environment.ts
+/push.sh
