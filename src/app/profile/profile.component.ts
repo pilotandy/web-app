@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { WaitState } from '../shared/components/waiting.component';
 import { NotifyService, NotifyType } from '../shared/services/notify.service';
 import { User, UserService } from '../user/user.service';
 
@@ -15,6 +16,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     viewer: User;
 
     notifyTypes: NotifyType[];
+
+    waiting = {
+        phone: WaitState.idle,
+    };
 
     constructor(
         private userService: UserService,
@@ -52,6 +57,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.notifyService.types().then((types: NotifyType[]) => {
             this.notifyTypes = types;
         });
+
+        if (this.user && !this.user.data.phone) {
+            this.user.data.phone = '';
+        }
     }
 
     ngOnDestroy(): void {
@@ -89,8 +98,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
     }
 
-    onChangePhone(phone) {
-        console.log(phone);
+    validPhone() {
+        this.waiting.phone = WaitState.idle;
+        const regexp = new RegExp('^[0-9]{10}$');
+        return regexp.test(this.user.data.phone);
+    }
+
+    onSavePhone() {
+        this.waiting.phone = WaitState.wait;
+        const u = JSON.parse(JSON.stringify(this.user));
+        this.userService.saveUser(u).then(
+            (user) => {
+                this.user = user;
+                this.waiting.phone = WaitState.success;
+                setTimeout(() => {
+                    this.waiting.phone = WaitState.idle;
+                }, 250);
+            },
+            (err) => {
+                this.waiting.phone = WaitState.error;
+            }
+        );
     }
 
     systemType() {
@@ -102,6 +130,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     onEmailNotifyChange(systemId) {
         const user = JSON.parse(JSON.stringify(this.user));
+        if (Array.isArray(user.notifications)) {
+            user.notifications = {};
+        }
         let n = user.notifications[systemId];
         if (!n) {
             n = this.systemType();
@@ -116,6 +147,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     onSMSNotifyChange(systemId) {
         const user = JSON.parse(JSON.stringify(this.user));
+        if (Array.isArray(user.notifications)) {
+            user.notifications = {};
+        }
         let n = user.notifications[systemId];
         if (!n) {
             n = this.systemType();

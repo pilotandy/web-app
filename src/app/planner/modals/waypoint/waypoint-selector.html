@@ -1,0 +1,56 @@
+<div class="modal-header">Select a Waypoint</div>
+<div class="modal-body">
+    <tabset *ngIf="waypoints" [justified]="true">
+        <tab heading="Airports">
+            <ul class="list-group tab-body">
+                <li
+                    class="list-group-item"
+                    *ngIf="waypoints.airports.length < 1"
+                >
+                    No Airports Nearby
+                </li>
+                <li
+                    class="list-group-item py-1 px-3"
+                    *ngFor="let waypoint of waypoints.airports"
+                >
+                    <app-waypoint-item
+                        class="waypoint-selector"
+                        [waypoint]="waypoint"
+                        (click)="onSelect(waypoint)"
+                    ></app-waypoint-item>
+                </li>
+            </ul>
+        </tab>
+        <tab heading="Navaids">
+            <ul class="list-group tab-body">
+                <li class="list-group-item" *ngIf="waypoints.navs < 1">
+                    No Navaids Nearby
+                </li>
+                <li
+                    class="list-group-item py-1 px-3"
+                    *ngFor="let waypoint of waypoints.navs"
+                >
+                    <app-waypoint-item
+                        class="waypoint-selector"
+                        [waypoint]="waypoint"
+                        (click)="onSelect(waypoint)"
+                    ></app-waypoint-item>
+                </li>
+            </ul>
+        </tab>
+        <tab heading="GPS">
+            <ul class="list-group tab-body">
+                <li
+                    class="list-group-item py-1 px-3"
+                    *ngFor="let waypoint of waypoints.gps"
+                >
+                    <app-waypoint-item
+                        class="waypoint-selector"
+                        [waypoint]="waypoint"
+                        (click)="onSelect(waypoint)"
+                    ></app-waypoint-item>
+                </li>
+            </ul>
+        </tab>
+    </tabset>
+</div>

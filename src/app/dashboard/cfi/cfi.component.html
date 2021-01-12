@@ -32,6 +32,7 @@
             <div *ngFor="let u of users">
                 <li class="pdd-vertical-10 pdd-horizon-20">
                     <img
+                        *ngIf="u.data.image"
                         class="profile-img img-fluid small-img"
                         [src]="u.data.image | safeUrl"
                     />

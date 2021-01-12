@@ -18,14 +18,6 @@
                             </h4>
                             <p *ngFor="let group of user.groups">{{ group }}</p>
                         </div>
-                        <!-- <div class="pdd-horizon-30 pdd-vertical-20">
-                            <h5 class="text-semibold mrg-btm-5">About</h5>
-                            <p>
-                                It looks like Sandpeople did this, all right.
-                                Look, here are Gaffi sticks, Bantha tracks. It's
-                                just...I never heard of them.
-                            </p>
-                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -83,52 +75,44 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <p class="mrg-top-10 text-dark">
-                                        <b>Phone</b>
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        (change)="onChangePhone($event)"
-                                        [value]="user.data.phone"
-                                    />
-                                </div>
-                            </div>
-                            <!-- <hr />
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <p class="mrg-top-10 text-dark">
-                                        <b>Phone Number</b>
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="mrg-top-10">
-                                        New York, United State
-                                    </p>
-                                </div>
-                            </div>
                             <hr />
                             <div class="row">
                                 <div class="col-md-3">
                                     <p class="mrg-top-10 text-dark">
-                                        <b>Status</b>
+                                        <b>Phone</b>
+                                        10 digits only
                                     </p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="mrg-top-10">
-                                        <span
-                                            class="status online mrg-top-10"
-                                        ></span>
-                                        <span class="mrg-left-10"
-                                            >Available</span
-                                        >
-                                    </p>
+                                    <div class="input-group mb-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            [(ngModel)]="user.data.phone"
+                                        />
+                                        <div class="input-group-append">
+                                            <button
+                                                class="btn btn-outline-secondary"
+                                                [ngClass]="
+                                                    validPhone()
+                                                        ? ''
+                                                        : 'disabled'
+                                                "
+                                                (click)="
+                                                    validPhone() &&
+                                                        onSavePhone()
+                                                "
+                                                type="button"
+                                            >
+                                                Save
+                                                <app-waiting
+                                                    [state]="waiting.phone"
+                                                ></app-waiting>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
 
@@ -227,102 +211,6 @@
                                     </td>
                                 </tr>
                             </table>
-
-                            <!-- <div
-                                class="row"
-                                *ngFor="
-                                    let notifyType of notifyTypes;
-                                    let i = index
-                                "
-                            >
-                                <div class="col-xs-10">
-                                    <div class="info">
-                                        <b class="text-dark font-size-16">{{
-                                            notifyType.title
-                                        }}</b>
-                                        <p>
-                                            {{ notifyType.description }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2 text-right"></div>
-                                <div class="col-xs-2 text-right"></div>
-                            </div> -->
-                            <!-- <hr />
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <ul class="list-unstyled list-info">
-                                        <li>
-                                            <span class="thumb-img pdd-top-10">
-                                                <i
-                                                    class="ti-mobile font-size-30"
-                                                ></i>
-                                            </span>
-                                            <div class="info">
-                                                <b
-                                                    class="text-dark font-size-16"
-                                                    >Everyone can contact me</b
-                                                >
-                                                <p>
-                                                    When we heard about
-                                                    Alderaan, we were afraid
-                                                    that you were
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-2 text-right">
-                                    <div
-                                        class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            name="toggle2"
-                                            id="toggle2"
-                                        />
-                                        <label for="toggle2"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <ul class="list-unstyled list-info">
-                                        <li>
-                                            <span class="thumb-img pdd-top-10">
-                                                <i
-                                                    class="ti-location-pin font-size-30"
-                                                ></i>
-                                            </span>
-                                            <div class="info">
-                                                <b
-                                                    class="text-dark font-size-16"
-                                                    >Show my location</b
-                                                >
-                                                <p>
-                                                    I said, all systems have
-                                                    been alerted to your
-                                                    presence, sir.
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-2 text-right">
-                                    <div
-                                        class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            name="toggle3"
-                                            id="toggle3"
-                                            checked
-                                        />
-                                        <label for="toggle3"></label>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -330,5 +218,5 @@
         </div>
     </div>
 
-    <!-- <app-profile-statement *ngIf="user" [user]="user"></app-profile-statement>-->
+    <!--<app-profile-statement *ngIf="user" [user]="user"></app-profile-statement>-->
 </div>

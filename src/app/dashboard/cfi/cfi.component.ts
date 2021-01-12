@@ -1,7 +1,7 @@
 import { AddInvoiceComponent } from './billing/add-invoice/add-invoice.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/user/user.service';
+import { User, UserService } from 'src/app/user/user.service';
 import { Subscription } from 'rxjs';
 import { AddPaymentComponent } from './billing/add-payment/add-payment.component';
 
@@ -16,7 +16,10 @@ export class CFIComponent implements OnInit {
 
     private subs: Subscription[] = [];
 
-    constructor(private modalService: BsModalService) {}
+    constructor(
+        private modalService: BsModalService,
+        private userService: UserService
+    ) {}
 
     ngOnInit(): void {}
 
@@ -36,9 +39,9 @@ export class CFIComponent implements OnInit {
     addInvoice(): void {
         const invcRef = this.modalService.show(AddInvoiceComponent);
         invcRef.content.action.subscribe((success) => {
-            // if(success){
-            //     //something
-            // }
+            if (success) {
+                this.userService.refresh();
+            }
             invcRef.hide();
         });
     }

@@ -40,15 +40,12 @@
                                 <a
                                     href=""
                                     class="title no-pdd-vertical text-semibold inline-block"
-                                    *ngIf="!user.groups.includes('Flight Instructor')"
-                                    ><span>{{ event.title }}</span></a
+                                    ><span
+                                        >{{getUser(event.owner)}}: {{
+                                        event.title }}</span
+                                    ></a
                                 >
-                                <a
-                                    href=""
-                                    class="title no-pdd-vertical text-semibold inline-block"
-                                    *ngIf="user.groups.includes('Flight Instructor')"
-                                    ><span>User: {{ event.title }}</span></a
-                                >
+
                                 <span class="sub-title">
                                     <span
                                         >{{event.start | date:

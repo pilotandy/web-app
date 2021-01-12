@@ -1,46 +1,42 @@
 <div #gmap class="full-pane"></div>
-<!--
-<div class="container">
-    <div class="row">
-        <input
-            id="sidebar-toggle-input"
-            name="sidebar-toggle-input"
-            class="sidebar-toggle-input"
-            type="checkbox"
-        />
-        <div class="col side-bar pt-3">
-            <label for="sidebar-toggle-input" class="sidebar-toggle"
-                ><i class="fas fa-fw fa-lg"></i
-            ></label>
 
-            <input
-                #searchBox
-                type="text"
-                class="search py-1 px-3 mb-3"
-                placeholder="Search"
-            />
-
-            <ul class="list-group mb-3">
-                <li
-                    *ngFor="let map of baseMaps"
-                    class="list-group-item list-group-item-action py-1 px-3"
-                    (click)="onMapTypeSelect(map)"
-                    [ngClass]="{ active: map.selected }"
-                >
-                    {{ map.displayName }}
-                </li>
-            </ul>
-
-            <ul class="list-group mb-3">
-                <li
-                    class="list-group-item list-group-item-action py-1 px-3"
-                    (click)="onShowNavLog()"
-                >
-                    Navigation Log
-                </li>
-            </ul>
-        </div>
-        <div class="col full-height m-0 p-0"></div>
+<div class="planner-header">
+    <div class="options-toggle" (click)="toggleOptionsCollapse()">
+        <div class="ei ei-menu-4" *ngIf="!options.show"></div>
+        <div class="ei ei-up-chevron" *ngIf="options.show"></div>
+    </div>
+    <div class="navlog-toggle" (click)="toggleNavlogCollapse()">
+        <div class="ei ei-graph" *ngIf="!navlog.show"></div>
+        <div class="ei ei-up-chevron" *ngIf="navlog.show"></div>
     </div>
 </div>
--->
+
+<div class="options p-1 col-12 col-md-4" [ngClass]="options.show ? 'show' : ''">
+    <input
+        #searchBox
+        type="text"
+        class="form-control px-2 py-0 search mb-2"
+        placeholder="Search"
+    />
+
+    <fieldset>
+        <legend>Maps</legend>
+    </fieldset>
+
+    <ul class="list-group mb-2">
+        <li
+            *ngFor="let map of baseMaps"
+            class="list-group-item list-group-item-action px-2 py-1"
+            (click)="onMapTypeSelect(map)"
+            [ngClass]="{ active: map.selected }"
+        >
+            {{ map.displayName }}
+        </li>
+    </ul>
+
+    ADSB
+</div>
+
+<div class="navlog mt-1 p-1 col-12" [ngClass]="navlog.show ? 'show' : ''">
+    The navigation lgo goes here!
+</div>

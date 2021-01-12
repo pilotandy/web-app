@@ -5,6 +5,7 @@ import { SharedModule } from './shared/shared.module';
 import { TemplateModule } from './template/template.module';
 import { TemplateService } from './shared/services/template.service';
 import { NotifyService } from './shared/services/notify.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Layout Component
 import { CommonLayoutComponent } from './common/common-layout.component';
@@ -27,10 +28,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 // Hammer
 import 'hammerjs';
 import 'hammer-timejs';
+
+// Modals
 import { AddInvoiceComponent } from './dashboard/cfi/billing/add-invoice/add-invoice.component';
 import { AddPaymentComponent } from './dashboard/cfi/billing/add-payment/add-payment.component';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WaypointSelectorComponent } from './planner/modals/waypoint/waypoint-selector';
 
 @NgModule({
     imports: [
@@ -48,6 +50,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         AuthenticationLayoutComponent,
         AddInvoiceComponent,
         AddPaymentComponent,
+        WaypointSelectorComponent,
     ],
 
     providers: [

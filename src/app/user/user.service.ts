@@ -29,6 +29,7 @@ export interface User {
         presolo?: boolean;
         availability?: any[];
         image?: string;
+        phone?: string;
     };
     invoices: Invoice[];
     payments: Payment[];
@@ -83,6 +84,10 @@ export class UserService {
 
     private getUser(userId: number) {
         return this.http.get('/api/users/' + userId + '/');
+    }
+
+    public refresh() {
+        this.getAllUsers();
     }
 
     public saveUser(user: User) {

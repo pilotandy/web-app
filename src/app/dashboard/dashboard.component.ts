@@ -81,6 +81,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
     }
 
+    getUser(id) {
+        const user = this.users.find((u) => {
+            return u.id === id;
+        });
+        return user.firstname + ' ' + user.lastname;
+    }
+
     doTheMath() {
         this.balance = 0;
         this.user.invoices

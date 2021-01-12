@@ -1,9 +1,0 @@
-.full-pane {
-    position: absolute;
-    top: 65px;
-    left: 0px;
-    right: 0px;
-    min-height: calc(100vh - 65px);
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-}

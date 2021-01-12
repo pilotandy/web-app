@@ -1,0 +1,80 @@
+.full-pane {
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    min-height: calc(100vh - 65px);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+}
+
+.planner-header {
+    position: relative;
+    height: 3em;
+    color: #313644;
+}
+
+/* Options */
+
+.options-toggle {
+    float: left;
+    cursor: pointer;
+}
+
+.options-toggle div {
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 100%;
+    background: #eeeeee;
+    color: #0f9aee;
+    border: 1px solid #0f9aee;
+    padding: 5px;
+}
+
+.options {
+    position: relative;
+    display: none;
+    width: 100%;
+    max-height: calc(100vh - 150px);
+    border-radius: 5px;
+    background: #eeeeee;
+    color: #0f9aee;
+}
+
+.options.show {
+    display: block;
+}
+
+/* Nav log */
+.navlog-toggle {
+    float: right;
+    cursor: pointer;
+}
+
+.navlog-toggle div {
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 100%;
+    background: #eeeeee;
+    color: #0f9aee;
+    border: 1px solid #0f9aee;
+    padding: 5px;
+}
+
+.navlog {
+    position: relative;
+    display: none;
+    width: 100%;
+    max-height: calc(100vh - 150px);
+    border-radius: 5px;
+    background: #eeeeee;
+    color: #0f9aee;
+}
+
+.navlog.show {
+    display: block;
+}
+
+.search {
+    height: calc(1.5em + 0.75rem + 2px);
+}
