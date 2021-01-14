@@ -100,7 +100,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     return 0;
                 }
             })
-            .slice(0, 4) // Limit to 4
             .forEach((invc) => {
                 let amt = 0;
                 invc.items.forEach((i) => {
