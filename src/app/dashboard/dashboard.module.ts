@@ -13,12 +13,14 @@ import { PPLComponent } from './ppl/ppl.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SharedModule } from '../shared/shared.module';
+import { WidgetModule } from '../widgets/widget.module';
 
 @NgModule({
     imports: [
         RouterModule.forChild(DashboardRoutes),
         PerfectScrollbarModule,
         SharedModule,
+        WidgetModule,
     ],
     declarations: [
         DashboardComponent,

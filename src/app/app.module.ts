@@ -33,6 +33,7 @@ import 'hammer-timejs';
 import { AddInvoiceComponent } from './dashboard/cfi/billing/add-invoice/add-invoice.component';
 import { AddPaymentComponent } from './dashboard/cfi/billing/add-payment/add-payment.component';
 import { WaypointSelectorComponent } from './planner/modals/waypoint/waypoint-selector';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import { WaypointSelectorComponent } from './planner/modals/waypoint/waypoint-se
         TemplateModule,
         NgbModule,
         ModalModule.forRoot(),
+        BrowserAnimationsModule,
     ],
     declarations: [
         AppComponent,

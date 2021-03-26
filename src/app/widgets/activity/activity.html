@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-heading border bottom">
+        <h4 class="card-title">
+            Recent Activity
+            <a
+                *ngIf="max"
+                class="lnr lnr-expand expand-button"
+                [routerLink]="['/dashboard/activities']"
+            ></a>
+            <a
+                *ngIf="!max"
+                class="lnr lnr-contract expand-button"
+                [routerLink]="['/dashboard/']"
+            ></a>
+        </h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-unstyled list-info">
+            <div *ngFor="let activity of activities | slice:0:getMax();">
+                <li class="pdd-vertical-10 pdd-horizon-20">
+                    <div class="date">
+                        <div class="day">{{activity.date | date: 'd'}}</div>
+                        <div class="mon">{{activity.date | date: 'MMM'}}</div>
+                    </div>
+                    <div class="info">
+                        <a
+                            href=""
+                            class="title no-pdd-vertical text-semibold inline-block"
+                            ><span>{{ activity.title }}</span></a
+                        >
+                        <span class="sub-title">
+                            <span>{{ activity.subtitle }}</span>
+                        </span>
+                    </div>
+                </li>
+            </div>
+            <li *ngIf="activities.length === 0">No recent activity.</li>
+        </ul>
+    </div>
+</div>

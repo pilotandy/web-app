@@ -1,0 +1,27 @@
+<ul class="list-unstyled list-info">
+    <div *ngFor="let student of students">
+        <li class="pdd-vertical-10 pdd-horizon-20">
+            <img
+                *ngIf="student.data.image"
+                class="profile-img img-fluid small-img"
+                [src]="student.data.image | safeUrl"
+            />
+            <div class="info">
+                <a
+                    href=""
+                    class="title no-pdd-vertical text-semibold inline-block"
+                    [routerLink]="['/profile/' + student.id]"
+                >
+                    <span>{{ student.firstname }} {{ student.lastname }}</span>
+                </a>
+                <span class="sub-title">
+                    <span
+                        >Account Balance: {{ calcBalance(student) | currency
+                        }}</span
+                    >
+                </span>
+            </div>
+        </li>
+    </div>
+    <li *ngIf="students.length === 0">No students.</li>
+</ul>

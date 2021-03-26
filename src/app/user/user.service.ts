@@ -86,7 +86,7 @@ export class UserService {
         return this.http.get('/api/users/' + userId + '/');
     }
 
-    public refresh() {
+    public refreshAll() {
         this.getAllUsers();
     }
 
@@ -94,16 +94,6 @@ export class UserService {
         return new Promise<User>((resolve, reject) => {
             this.http.patch('/api/users/' + user.id + '/', user).subscribe(
                 (saved: User) => {
-                    const users = this.allUsersSubject.value;
-                    users.forEach((u: User) => {
-                        if (u.id === saved.id) {
-                            u = saved;
-                        }
-                    });
-                    this.allUsersSubject.next(users);
-                    // if (this.currentUserSubject.value.id === saved.id) {
-                    //     this.currentUserSubject.next(saved);
-                    // }
                     resolve(saved);
                 },
                 (err) => {
@@ -114,13 +104,8 @@ export class UserService {
     }
 
     private getAllUsers() {
-        this.http.get('/api/users/').subscribe(
-            (all: User[]) => {
-                this.allUsersSubject.next(all);
-            },
-            (error) => {
-                this.allUsersSubject.next([]);
-            }
-        );
+        this.http.get('/api/users/').subscribe((all: User[]) => {
+            this.allUsersSubject.next(all);
+        });
     }
 }

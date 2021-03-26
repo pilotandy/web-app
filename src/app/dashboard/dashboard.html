@@ -12,128 +12,14 @@
                     *ngIf="group === 'Private Pilot'"
                 ></app-dashboard-ppl>
             </div>
-
             <div *ngIf="user.groups.length === 0">
                 <app-dashboard-welcome></app-dashboard-welcome>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-heading border bottom">
-                    <h4 class="card-title">Upcoming Schedule</h4>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled list-info">
-                        <li
-                            *ngFor="let event of events"
-                            class="pdd-vertical-10 pdd-horizon-20"
-                        >
-                            <div class="date">
-                                <div class="day">
-                                    {{event.start | date: 'd'}}
-                                </div>
-                                <div class="mon">
-                                    {{event.start | date: 'MMM'}}
-                                </div>
-                            </div>
-                            <div class="info">
-                                <a
-                                    href=""
-                                    class="title no-pdd-vertical text-semibold inline-block"
-                                    ><span
-                                        >{{getUser(event.owner)}}: {{
-                                        event.title }}</span
-                                    ></a
-                                >
-
-                                <span class="sub-title">
-                                    <span
-                                        >{{event.start | date:
-                                        'shortTime'}}</span
-                                    >
-                                </span>
-                            </div>
-                        </li>
-                        <li *ngIf="events.length === 0">No upcoming events.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-heading border bottom">
-                    <h4 class="card-title">Recent Activity</h4>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled list-info">
-                        <div *ngFor="let activity of activities">
-                            <li class="pdd-vertical-10 pdd-horizon-20">
-                                <div class="date">
-                                    <div class="day">
-                                        {{activity.date | date: 'd'}}
-                                    </div>
-                                    <div class="mon">
-                                        {{activity.date | date: 'MMM'}}
-                                    </div>
-                                </div>
-                                <div class="info">
-                                    <a
-                                        href=""
-                                        class="title no-pdd-vertical text-semibold inline-block"
-                                        ><span>{{ activity.title }}</span></a
-                                    >
-                                    <span class="sub-title">
-                                        <span>{{ activity.subtitle }}</span>
-                                    </span>
-                                </div>
-                            </li>
-                        </div>
-                        <li *ngIf="activities.length === 0">
-                            No recent activity.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-heading border bottom">
-                    <h4 class="card-title">
-                        Account
-                        <span
-                            class="float-right"
-                            [ngClass]="balance > 0 ? 'text-danger':'text-success'"
-                            >{{balance | currency}}</span
-                        >
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled list-info">
-                        <li
-                            *ngFor="let account of accounts"
-                            class="pdd-vertical-10 pdd-horizon-20"
-                        >
-                            <div class="date">
-                                <div class="day">
-                                    {{account.date | date: 'd'}}
-                                </div>
-                                <div class="mon">
-                                    {{account.date | date: 'MMM'}}
-                                </div>
-                            </div>
-                            <div class="info">
-                                <a
-                                    href=""
-                                    class="title no-pdd-vertical text-semibold inline-block"
-                                    ><span>{{ account.title }}</span></a
-                                >
-                                <span class="sub-title">
-                                    <span>{{account.amount| currency}}</span>
-                                </span>
-                            </div>
-                        </li>
-                        <li *ngIf="accounts.length === 0">
-                            No recent activity.
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <app-upcoming [max]="5"></app-upcoming>
+            <app-activity [max]="5"></app-activity>
+            <app-account [max]="5"></app-account>
         </div>
     </div>
 </div>

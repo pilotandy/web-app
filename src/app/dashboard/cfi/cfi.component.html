@@ -27,33 +27,7 @@
     <div class="card-heading border bottom">
         <h4 class="card-title">Students</h4>
     </div>
-    <div class="card-body" *ngIf="users">
-        <ul class="list-unstyled list-info">
-            <div *ngFor="let u of users">
-                <li class="pdd-vertical-10 pdd-horizon-20">
-                    <img
-                        *ngIf="u.data.image"
-                        class="profile-img img-fluid small-img"
-                        [src]="u.data.image | safeUrl"
-                    />
-                    <div class="info">
-                        <a
-                            href=""
-                            class="title no-pdd-vertical text-semibold inline-block"
-                            [routerLink]="['/profile/' + u.id]"
-                        >
-                            <span>{{ u.firstname }} {{ u.lastname }}</span>
-                        </a>
-                        <span class="sub-title">
-                            <span
-                                >Account Balance:
-                                {{ calcBalance(u) | currency }}</span
-                            >
-                        </span>
-                    </div>
-                </li>
-            </div>
-            <li *ngIf="users.length === 0">No users.</li>
-        </ul>
+    <div class="card-body">
+        <app-student></app-student>
     </div>
 </div>
