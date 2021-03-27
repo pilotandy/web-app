@@ -16,6 +16,7 @@ export class UpcomingComponent implements OnInit, OnDestroy {
     @Input() max: number;
     @Input() all = false;
     events: CalendarEvent[] = [];
+    users: User[] = [];
 
     private subs: Subscription[] = [];
 
@@ -27,6 +28,11 @@ export class UpcomingComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subs.push(
             this.userService.currentUser.subscribe((u) => {
+                this.subs.push(
+                    this.userService.allUsers.subscribe((users: User[]) => {
+                        this.users = users;
+                    })
+                );
                 const start = moment(moment().format('YYYY-MM-DDTHH:mm:ssZ'));
                 const end = moment(start).add(1, 'months');
                 this.scheduleService.getEvents(start, end).then(
@@ -74,5 +80,14 @@ export class UpcomingComponent implements OnInit, OnDestroy {
         this.subs.forEach((s) => {
             s.unsubscribe();
         });
+    }
+
+    getUser(owner: number) {
+        const u = this.users.find((u) => {
+            return u.id === owner;
+        });
+        if (u) {
+            return u.firstname + ' ' + u.lastname;
+        }
     }
 }
