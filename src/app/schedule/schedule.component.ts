@@ -54,29 +54,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
                         return r.type !== 'Instructors';
                     }
                 );
-                users.forEach((u: User) => {
-                    if (u.groups.includes('Flight Instructor')) {
-                        this.calendar.resources = this.calendar.resources.concat(
-                            {
-                                id: u.id,
-                                type: 'Instructors',
-                                title: u.firstname + ' ' + u.lastname,
-                                businessHours: [
-                                    {
-                                        daysOfWeek: [1, 2, 3, 4, 5], // Weekdays
-                                        startTime: '16:30', // 4:30pm
-                                        endTime: '21:00', // 9pm
-                                    },
-                                    {
-                                        daysOfWeek: [6], // Saturday
-                                        startTime: '08:00', // 8am
-                                        endTime: '21:00', // 9pm
-                                    },
-                                ],
-                            }
-                        );
-                    }
-                });
             })
         );
         this.subs.push(
@@ -193,29 +170,5 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         if (this.user.groups.includes('Flight Instructor')) {
             users = this.userService.allUsersValue;
         }
-        // this.modalRef = this.bsModalService.show(EventComponent, {
-        //     initialState: {
-        //         event,
-        //         resources: this.calendar.resources,
-        //         users,
-        //     },
-        //     class: 'sm',
-        // });
-        // this.modalRef.content.action.subscribe(
-        //     (evnt: CalendarEvent) => {
-        //         const usr = users.find((u: User) => {
-        //             return u.id === evnt.owner;
-        //         });
-        //         evnt.title = usr.firstname + ' ' + usr.lastname;
-        //         this.scheduleService.save(evnt);
-        //     },
-        //     (id: number) => {
-        //         this.scheduleService.delete(id);
-        //         this.modalRef.hide();
-        //     },
-        //     () => {
-        //         this.modalRef.hide();
-        //     }
-        // );
     }
 }
