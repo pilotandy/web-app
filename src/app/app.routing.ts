@@ -5,12 +5,13 @@ import { CommonLayoutComponent } from './common/common-layout.component';
 import { AuthenticationLayoutComponent } from './common/authentication-layout.component';
 import { AuthGuard } from './auth/auth.guard';
 import { IntroComponent } from './common/intro.component';
+import { Page404Component } from './extras/404/404.component';
+import { Page403Component } from './extras/403/403.component';
 
 export const AppRoutes: Routes = [
     {
         path: '',
         component: CommonLayoutComponent,
-
         children: [
             {
                 path: 'dashboard',
@@ -61,7 +62,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: '',
-                component: IntroComponent
+                component: IntroComponent,
             },
         ],
     },
@@ -76,20 +77,14 @@ export const AppRoutes: Routes = [
                         (m) => m.AuthenticationModule
                     ),
             },
-            // {
-            //     path: '500',
-            //     component: Page500Component,
-            //     data: {
-            //         title: '500',
-            //     },
-            // },
-            // {
-            //     path: '404',
-            //     component: Page404Component,
-            //     data: {
-            //         title: '404',
-            //     },
-            // },
         ],
+    },
+    {
+        path: 'auth/403',
+        component: Page403Component,
+    },
+    {
+        path: '**',
+        component: Page404Component,
     },
 ];
