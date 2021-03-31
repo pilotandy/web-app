@@ -1,1 +1,10 @@
-<app-lessons-ppl></app-lessons-ppl>
+<div *ngIf="selectedCourse">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="!selectedCourse">
+    Choose a course....
+
+    <div class="btn btn-link" (click)="onSelectCourse('private')">
+        Private Pilot
+    </div>
+</div>

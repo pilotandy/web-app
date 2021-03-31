@@ -9,6 +9,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ProfileRoutes } from './profile-routing.module';
 import { StatementComponent } from './statement.component';
 import { SharedModule } from '../shared/shared.module';
+import { WidgetModule } from '../widgets/widget.module';
+import { ExtrasModule } from '../extras/extras.module';
 
 @NgModule({
     imports: [
@@ -17,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
         CommonModule,
         SharedModule,
         NgxPrintModule,
+        WidgetModule,
     ],
     declarations: [ProfileComponent, StatementComponent],
     providers: [ThemeConstants],

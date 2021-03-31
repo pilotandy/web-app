@@ -10,7 +10,7 @@
             <a
                 *ngIf="!max"
                 class="lnr lnr-contract expand-button"
-                [routerLink]="['/dashboard/']"
+                (click)="goBack()"
             ></a>
         </h4>
     </div>

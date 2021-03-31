@@ -34,12 +34,14 @@ import { AddInvoiceComponent } from './dashboard/cfi/billing/add-invoice/add-inv
 import { AddPaymentComponent } from './dashboard/cfi/billing/add-payment/add-payment.component';
 import { WaypointSelectorComponent } from './planner/modals/waypoint/waypoint-selector';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ExtrasModule } from './extras/extras.module';
 
 @NgModule({
     imports: [
         BrowserModule,
         RouterModule.forRoot(AppRoutes, { useHash: false }),
         SharedModule,
+        ExtrasModule,
         TemplateModule,
         NgbModule,
         ModalModule.forRoot(),

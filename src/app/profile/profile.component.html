@@ -19,6 +19,7 @@
                             <p *ngFor="let group of user.groups">{{ group }}</p>
                         </div>
                     </div>
+                    <app-account [user]="user" max="5"></app-account>
                 </div>
                 <div class="col-md-8">
                     <div class="card">

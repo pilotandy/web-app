@@ -1,7 +1,51 @@
-<div class="lesson" *ngFor="let lesson of lessons">
-    <div class="title">
-        <img [src]="lesson.image" />
-        <span>{{ lesson.title }}</span>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-12">
+            <div role="group" class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button">
+                        Resume training
+                    </button>
+                </div>
+                <select
+                    class="form-control choose"
+                    (change)="onChangeLesson($event.target.value)"
+                    name="lesson"
+                >
+                    <option selected [value]="null">
+                        or, jump to a lesson...
+                    </option>
+                    <option *ngFor="let lesson of lessons" [value]="lesson.id">
+                        {{ lesson.title }}
+                    </option>
+                </select>
+            </div>
+        </div>
     </div>
-    <div class="body"></div>
+    <div class="row">
+        <div class="col col-12">
+            <ul class="pagination pagination-sm" *ngIf="selectedLesson">
+                <li class="page-item border-secondary">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item border-secondary">
+                    <a class="page-link">1</a>
+                </li>
+                <li class="page-item border-secondary">
+                    <a class="page-link">2</a>
+                </li>
+                <li class="page-item border-secondary">
+                    <a class="page-link">3</a>
+                </li>
+                <li class="page-item border-secondary">
+                    <a class="page-link">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-12">
+            <div class="card">Cool beans!</div>
+        </div>
+    </div>
 </div>

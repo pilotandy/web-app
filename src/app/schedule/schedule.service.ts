@@ -117,7 +117,7 @@ export class ScheduleService {
                 })
                 .subscribe(
                     (events: BackendEvent[]) => {
-                        const evts = [];
+                        const evts: CalendarEvent[] = [];
                         events.forEach((e) => {
                             evts.push({
                                 id: e.id,
@@ -128,9 +128,6 @@ export class ScheduleService {
                                 resourceIds: e.data.resources,
                                 color: e.data.color,
                                 editable: this.canEdit(e.owner),
-                                startEditable: this.canEdit(e.owner),
-                                durationEditable: this.canEdit(e.owner),
-                                resourceEditable: this.canEdit(e.owner),
                             });
                         });
                         resolve(evts);
@@ -169,7 +166,7 @@ export class ScheduleService {
             if (evnt.id) {
                 this.http.put('/api/event/' + evnt.id + '/', evnt).subscribe(
                     (e) => {
-                        resolve();
+                        resolve(evnt.id);
                     },
                     (err) => {
                         reject(err);
@@ -178,7 +175,7 @@ export class ScheduleService {
             } else {
                 this.http.post('/api/event/', evnt).subscribe(
                     (e) => {
-                        resolve();
+                        resolve(evnt.id);
                     },
                     (err) => {
                         reject(err);
@@ -192,7 +189,7 @@ export class ScheduleService {
         return new Promise<number>((resolve, reject) => {
             this.http.delete('/api/event/' + id + '/').subscribe(
                 (e) => {
-                    resolve();
+                    resolve(id);
                 },
                 (err) => {
                     reject(err);

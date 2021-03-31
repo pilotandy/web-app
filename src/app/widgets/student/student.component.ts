@@ -34,7 +34,17 @@ export class StudentComponent implements OnInit, OnDestroy {
         this.subs.push(
             this.userService.allUsers.subscribe((users: User[]) => {
                 if (users) {
-                    this.students = users;
+                    this.students = users.sort((a, b) => {
+                        const an = a.firstname + ' ' + a.lastname;
+                        const bn = b.firstname + ' ' + b.lastname;
+                        if (an < bn) {
+                            return -1;
+                        } else if (an > bn) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
                 }
             })
         );
@@ -42,17 +52,19 @@ export class StudentComponent implements OnInit, OnDestroy {
 
     calcBalance(user: User) {
         let balance = 0;
-        user.invoices.forEach((invc) => {
-            let amt = 0;
-            invc.items.forEach((i) => {
-                amt += i.quantity * i.rate;
+        if (user) {
+            user.invoices.forEach((invc) => {
+                let amt = 0;
+                invc.items.forEach((i) => {
+                    amt += i.quantity * i.rate;
+                });
+                balance += amt;
             });
-            balance += amt;
-        });
 
-        user.payments.forEach((p) => {
-            balance -= p.amount;
-        });
+            user.payments.forEach((p) => {
+                balance -= p.amount;
+            });
+        }
         return balance;
     }
 }

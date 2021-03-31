@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService, User } from 'src/app/user/user.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-activity',
@@ -17,7 +18,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
 
     private subs: Subscription[] = [];
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private location: Location) {}
 
     ngOnInit(): void {
         this.subs.push(
@@ -88,6 +89,10 @@ export class ActivityComponent implements OnInit, OnDestroy {
                 return 0;
             }
         });
+    }
+
+    goBack() {
+        this.location.back();
     }
 
     getMax() {

@@ -49,7 +49,6 @@ export class DayCalendarComponent
 
     ngOnInit() {
         this.getEvents();
-
         this.subs.push(
             this.userService.currentUser.subscribe((user: User) => {
                 this.user = user;
@@ -72,15 +71,15 @@ export class DayCalendarComponent
         this.domCells.changes.subscribe((t) => {
             if (this.refreshCells) {
                 this.refreshCells = false;
-                this.ngForRendred(true);
+                this.ngForRendered(true);
             }
         });
-        this.ngForRendred(false);
+        this.ngForRendered(false);
     }
 
     ngOnChanges() {
         this.times = [];
-        let t = moment(this.date.format('YYYY-MM-DDT00:00:00'));
+        let t = moment(this.date.format('YYYY-MM-DDT00:00:00Z'));
         for (let i = 0; i < 48; i++) {
             this.times.push(moment(t));
             t = moment(t.add(30, 'minutes'));
@@ -88,12 +87,12 @@ export class DayCalendarComponent
         this.refreshCells = true;
     }
 
-    ngForRendred(fetchEvents: boolean) {
+    ngForRendered(fetchEvents: boolean) {
         this.cells = {};
         this.domCells.forEach((c) => {
             this.cells[c.nativeElement.getAttribute('id')] = {
                 x: c.nativeElement.offsetLeft,
-                y: c.nativeElement.offsetTop,
+                y: c.nativeElement.offsetTop % 1056,
                 w: c.nativeElement.offsetWidth,
                 h: c.nativeElement.offsetHeight,
             };

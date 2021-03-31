@@ -5,12 +5,12 @@
             <a
                 *ngIf="max"
                 class="lnr lnr-expand expand-button"
-                [routerLink]="['/dashboard/account']"
+                [routerLink]="['account']"
             ></a>
             <a
                 *ngIf="!max"
                 class="lnr lnr-contract expand-button"
-                [routerLink]="['/dashboard/']"
+                (click)="goBack()"
             ></a>
             <span
                 class="float-right"
