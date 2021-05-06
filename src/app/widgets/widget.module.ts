@@ -8,6 +8,7 @@ import { UpcomingComponent } from './upcoming/upcoming.component';
 import { AccountComponent } from './account/account.component';
 import { RouterModule } from '@angular/router';
 import { StudentComponent } from './student/student.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
     imports: [CommonModule, RouterModule, PerfectScrollbarModule, SharedModule],
@@ -15,6 +16,7 @@ import { StudentComponent } from './student/student.component';
         ActivityComponent,
         UpcomingComponent,
         AccountComponent,
+        PaymentComponent,
         StudentComponent,
     ],
     providers: [ThemeConstants],

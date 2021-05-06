@@ -88,6 +88,11 @@ export class UserService {
 
     public refreshAll() {
         this.getAllUsers();
+        this.getUser(this.currentUserSubject.value.id).subscribe(
+            (user: User) => {
+                this.currentUserSubject.next(user);
+            }
+        );
     }
 
     public saveUser(user: User) {

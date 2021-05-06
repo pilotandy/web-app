@@ -12,14 +12,24 @@
                 class="lnr lnr-contract expand-button"
                 (click)="goBack()"
             ></a>
-            <span
-                class="float-right"
-                [ngClass]="balance > 0 ? 'text-danger':'text-success'"
-                >{{balance | currency}} &nbsp;&nbsp;</span
-            >
         </h4>
     </div>
+
     <div class="card-body">
+        <div class="overview">
+            Balance:
+            <span [ngClass]="balance > 0 ? 'text-danger':'text-success'"
+                >{{balance | currency}} &nbsp;&nbsp;</span
+            >
+            <div
+                class="btn btn-sm btn-outline-success payment"
+                (click)="onMakePayment()"
+            >
+                <i class="icon lnr lnr-credit-card"></i>
+                <span class="title">Make a Payment</span>
+            </div>
+        </div>
+
         <ul class="list-unstyled list-info">
             <li
                 *ngFor="let account of accounts | slice:0:getMax();"
