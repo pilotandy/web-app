@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { PaymentComponent } from '../payment/payment.component';
 
 export interface Account {
     date: moment.Moment;
@@ -30,7 +32,8 @@ export class AccountComponent implements OnInit, OnDestroy {
     constructor(
         private userService: UserService,
         private location: Location,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private modalService: BsModalService
     ) {}
 
     ngOnInit(): void {
@@ -57,7 +60,6 @@ export class AccountComponent implements OnInit, OnDestroy {
                             }
                         });
                     } else {
-                        console.log(u);
                         this.loadUser(u);
                     }
                 })
@@ -120,5 +122,20 @@ export class AccountComponent implements OnInit, OnDestroy {
             return this.max;
         }
         return this.accounts.length;
+    }
+
+    onMakePayment() {
+        const pmntRef = this.modalService.show(PaymentComponent, {
+            initialState: {
+                user: this.user,
+                balance: this.balance,
+            },
+        });
+        pmntRef.content.action.subscribe((success) => {
+            if (success) {
+                this.userService.refreshAll();
+            }
+            pmntRef.hide();
+        });
     }
 }

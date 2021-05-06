@@ -1,0 +1,86 @@
+<div class="modal-header">
+    Make a Payment <span class="balance">Balance {{balance|currency}}</span>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                [class]="selectedTab === 0? 'active': ''"
+                (click)="onSelectTab(0);"
+                >Card</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                [class]="selectedTab === 1? 'active': ''"
+                (click)="onSelectTab(1);"
+                >Mail</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                [class]="selectedTab === 2? 'active': ''"
+                (click)="onSelectTab(2);"
+                >Paypal</a
+            >
+        </li>
+    </ul>
+    <br />
+    <div [hidden]="selectedTab != 0">
+        <div id="form-container">
+            <div id="sq-card"></div>
+        </div>
+        <div *ngIf="!loadingForm">
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="amount"
+                    aria-describedby="button-addon2"
+                />
+                <div class="input-group-append">
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="button"
+                        [class]="isValidPayment() ? '' : 'disabled'"
+                        (click)="isValidPayment() && onSubmitPayment($event)"
+                    >
+                        Pay {{ calcTotal() | currency}}
+                        <i
+                            *ngIf="processing"
+                            class="fa fa fa-spinner fa-spin"
+                        ></i>
+                    </button>
+                </div>
+            </div>
+            Note: A {{fee_percent}}% + {{fee_flat}} card processing fee will be
+            added to your payment.
+        </div>
+        <div *ngIf="loadingForm" class="center">
+            <i class="text-info fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="success text-success" *ngIf="success">{{success}}</div>
+        <div class="error text-danger" *ngIf="error">{{error}}</div>
+    </div>
+
+    <div [hidden]="selectedTab != 1">
+        <p>
+            Mail a check to:<br />
+            Andrew Craner<br />
+            7545 Private Road 2451<br />
+            West Plains, MO 65775<br />
+            <br />
+            Your account will be updated upon receipt of the payment.
+        </p>
+    </div>
+
+    <div [hidden]="selectedTab != 2">Something about paypal</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary float-right" (click)="onCancel()">
+        Cancel
+    </button>
+</div>
