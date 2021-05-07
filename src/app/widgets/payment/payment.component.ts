@@ -35,8 +35,8 @@ export class PaymentComponent implements OnInit, OnDestroy, AfterContentInit {
 
     paymentForm: typeof SqPaymentForm;
     loadingForm = false;
-    feePercent = 3.5;
-    feeFlat = 0.15;
+    feePercent = 2.9;
+    feeFlat = 0.3;
     amount = 0;
     idempotencyKey = '';
     success: string | null;
