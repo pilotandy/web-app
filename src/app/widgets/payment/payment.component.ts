@@ -35,8 +35,8 @@ export class PaymentComponent implements OnInit, OnDestroy, AfterContentInit {
 
     paymentForm: typeof SqPaymentForm;
     loadingForm = false;
-    feePercent = 3.5;
-    feeFlat = 0.15;
+    feePercent = 2.9;
+    feeFlat = 0.3;
     amount = 0;
     idempotencyKey = '';
     success: string | null;
@@ -117,8 +117,8 @@ export class PaymentComponent implements OnInit, OnDestroy, AfterContentInit {
 
     calcTotal(): number {
         if (this.amount <= 0) return 0;
-        const fee = this.feePercent / 100.0 + 1.0;
-        const total = this.amount * fee + this.feeFlat + 0.0001;
+        const fee = 1.0 - this.feePercent / 100.0;
+        const total = this.amount / fee + this.feeFlat + 0.0001;
         return Number(total.toFixed(2));
     }
 

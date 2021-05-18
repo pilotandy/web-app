@@ -1,8 +1,5 @@
-import { map } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ScheduleService, CalendarEvent } from '../schedule/schedule.service';
-import { UserService, User, Invoice } from 'src/app/user/user.service';
-import * as moment from 'moment';
+import { UserService, User } from 'src/app/user/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,0 +1,60 @@
+<div class="card" *ngIf="user && user.data.presolo">
+    <div class="card-heading border bottom">
+        <h4 class="card-title">
+            Pre-solo Written Exam
+            <a
+                *ngIf="!open"
+                class="lnr lnr-expand expand-button"
+                [routerLink]="['presolo']"
+            ></a>
+            <a
+                *ngIf="open"
+                class="lnr lnr-contract expand-button"
+                (click)="goBack()"
+            ></a>
+        </h4>
+    </div>
+    <div class="card-body" *ngIf="!open">
+        <ul class="list-unstyled list-info">
+            <li>Expand to take the test.</li>
+        </ul>
+    </div>
+    <div class="card-body" *ngIf="open">
+        This is an untimed, open book test to evaluate your knowledge required
+        for solo flight.<br />As soon as it is completed, inform your flight
+        instructor for grading.<br />It is recommended that you save often. Say,
+        after completing each question.<br />Good luck!
+
+        <ul class="list-unstyled list-info">
+            <div *ngFor="let q of questions">
+                <li class="pdd-vertical-10 pdd-horizon-20">
+                    <div class="question">{{q.id}}: {{q.text}}</div>
+                    <textarea
+                        class="form-control answer"
+                        (blur)="onChangeAnswer(q.id, $event)"
+                        [value]="loadAnswer(q.id)"
+                    ></textarea>
+                    <div
+                        class="btn btn-outline-primary btn-sm mt-2"
+                        (click)="onSave(q.id)"
+                    >
+                        Save
+                        <i
+                            *ngIf="saving === q.id"
+                            class="text-info fa fa-spinner fa-spin"
+                        ></i>
+                        <i
+                            *ngIf="saved === q.id"
+                            class="text-success fa fa-check-circle"
+                        ></i>
+                    </div>
+                </li>
+            </div>
+            <li *ngIf="questions.length === 0">Loading...</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card" *ngIf="!user || !user.data.presolo">
+    You are not allowed here!
+</div>

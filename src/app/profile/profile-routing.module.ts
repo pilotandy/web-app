@@ -1,3 +1,4 @@
+import { PreSoloComponent } from './../widgets/presolo/presolo.component';
 import { Routes } from '@angular/router';
 import { AdminGuard, AuthGuard } from '../auth/auth.guard';
 import { Page404Component } from '../extras/404/404.component';
@@ -25,6 +26,11 @@ export const ProfileRoutes: Routes = [
         path: ':id/account',
         canActivate: [AdminGuard],
         component: AccountComponent,
+    },
+    {
+        path: ':id/presolo',
+        canActivate: [AdminGuard],
+        component: PreSoloComponent,
     },
     {
         path: ':id',

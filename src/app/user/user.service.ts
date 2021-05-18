@@ -31,6 +31,9 @@ export interface User {
         image?: string;
         phone?: string;
     };
+    private: {
+        presolo?: any;
+    };
     invoices: Invoice[];
     payments: Payment[];
     notifications?: any;
@@ -53,6 +56,7 @@ export class UserService {
         lastname: '',
         groups: [],
         data: {},
+        private: {},
         invoices: [],
         payments: [],
     };

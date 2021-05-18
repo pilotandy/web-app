@@ -1,3 +1,4 @@
+import { PreSoloComponent } from './../widgets/presolo/presolo.component';
 import { Routes } from '@angular/router';
 
 // Dashboard Components
@@ -44,5 +45,9 @@ export const DashboardRoutes: Routes = [
     {
         path: 'account',
         component: AccountComponent,
+    },
+    {
+        path: 'presolo',
+        component: PreSoloComponent,
     },
 ];
