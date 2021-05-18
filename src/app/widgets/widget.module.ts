@@ -1,3 +1,4 @@
+import { PreSoloComponent } from './presolo/presolo.component';
 import { NgModule } from '@angular/core';
 import { ThemeConstants } from '../shared/config/theme-constant';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -18,6 +19,7 @@ import { PaymentComponent } from './payment/payment.component';
         AccountComponent,
         PaymentComponent,
         StudentComponent,
+        PreSoloComponent,
     ],
     providers: [ThemeConstants],
     exports: [
@@ -25,6 +27,7 @@ import { PaymentComponent } from './payment/payment.component';
         UpcomingComponent,
         AccountComponent,
         StudentComponent,
+        PreSoloComponent,
     ],
 })
 export class WidgetModule {}

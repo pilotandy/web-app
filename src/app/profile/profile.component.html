@@ -20,6 +20,11 @@
                         </div>
                     </div>
                     <app-account [user]="user" max="5"></app-account>
+                    <app-presolo
+                        [open]="false"
+                        [user]="user"
+                        *ngIf="user.data.presolo"
+                    ></app-presolo>
                 </div>
                 <div class="col-md-8">
                     <div class="card">
@@ -93,7 +98,9 @@
                                         />
                                         <div class="input-group-append">
                                             <button
-                                                class="btn btn-outline-secondary"
+                                                class="
+                                                    btn btn-outline-secondary
+                                                "
                                                 [ngClass]="
                                                     validPhone()
                                                         ? ''
@@ -146,7 +153,12 @@
                                     </td>
                                     <td>
                                         <div
-                                            class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
+                                            class="
+                                                toggle-checkbox toggle-success
+                                                checkbox-inline
+                                                toggle-sm
+                                                mrg-top-15
+                                            "
                                         >
                                             <input
                                                 type="checkbox"
@@ -179,7 +191,12 @@
                                     </td>
                                     <td>
                                         <div
-                                            class="toggle-checkbox toggle-success checkbox-inline toggle-sm mrg-top-15"
+                                            class="
+                                                toggle-checkbox toggle-success
+                                                checkbox-inline
+                                                toggle-sm
+                                                mrg-top-15
+                                            "
                                         >
                                             <input
                                                 type="checkbox"
