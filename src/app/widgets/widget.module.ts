@@ -1,3 +1,4 @@
+import { ScheduleModule } from './../schedule/schedule.module';
 import { PreSoloComponent } from './presolo/presolo.component';
 import { NgModule } from '@angular/core';
 import { ThemeConstants } from '../shared/config/theme-constant';
@@ -12,7 +13,12 @@ import { StudentComponent } from './student/student.component';
 import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, PerfectScrollbarModule, SharedModule],
+    imports: [
+        CommonModule,
+        RouterModule,
+        PerfectScrollbarModule,
+        SharedModule
+    ],
     declarations: [
         ActivityComponent,
         UpcomingComponent,

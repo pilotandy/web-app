@@ -23,6 +23,11 @@ export const ProfileRoutes: Routes = [
         component: StatementComponent,
     },
     {
+        path: ':id/statement',
+        canActivate: [AuthGuard],
+        component: StatementComponent,
+    },
+    {
         path: ':id/account',
         canActivate: [AdminGuard],
         component: AccountComponent,

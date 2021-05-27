@@ -10,6 +10,7 @@ import { MomentPipe } from './pipes/moment.pipe';
 import { NgxPrintModule } from 'ngx-print';
 import { SafeUrlPipe } from './pipes/safeurl.pipe';
 import { WaitingComponent } from './components/waiting.component';
+import { DatePickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
     exports: [
@@ -22,6 +23,7 @@ import { WaitingComponent } from './components/waiting.component';
         SafeHtmlPipe,
         SafeUrlPipe,
         WaitingComponent,
+        DatePickerComponent,
     ],
     imports: [
         RouterModule,
@@ -30,7 +32,13 @@ import { WaitingComponent } from './components/waiting.component';
         NgbModule,
         NgxPrintModule,
     ],
-    declarations: [MomentPipe, SafeHtmlPipe, SafeUrlPipe, WaitingComponent],
+    declarations: [
+        MomentPipe,
+        SafeHtmlPipe,
+        SafeUrlPipe,
+        WaitingComponent,
+        DatePickerComponent,
+    ],
     providers: [],
 })
 export class SharedModule {}

@@ -31,7 +31,7 @@ export class PreSoloComponent implements OnInit, OnDestroy {
         this.presoloService.getQuestions().then((q) => {
             this.questions = q;
         });
-        if (this.user) {
+        if (this.user && this.user.private && this.user.private.presolo) {
             this.answers = this.user.private.presolo.answers;
         } else {
             this.subs.push(
@@ -45,7 +45,11 @@ export class PreSoloComponent implements OnInit, OnDestroy {
                                     const user = users.find((usr) => {
                                         return usr.id === id;
                                     });
-                                    if (user) {
+                                    if (
+                                        user &&
+                                        user.private &&
+                                        user.private.presolo
+                                    ) {
                                         this.user = user;
                                         this.answers =
                                             user.private.presolo.answers;

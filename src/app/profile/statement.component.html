@@ -12,7 +12,11 @@
     <div class="user">
         Statement for: {{ user.firstname }} {{ user.lastname }}
     </div>
-    <div class="balance">Account Balance: {{ calcBalance() | currency }}</div>
+    <div class="dtrange">
+        Dates: {{ start | momentPipe: 'MM/DD/YYYY' }} -
+        {{ end | momentPipe: 'MM/DD/YYYY' }}
+    </div>
+    <!-- <div class="balance">Account Balance: {{ calcBalance() | currency }}</div> -->
     <div class="section">Invoices:</div>
     <div *ngFor="let invoice of invoices" class="invoice">
         <div class="date">{{ invoice.date | momentPipe: 'MM/DD/YYYY' }}</div>
