@@ -1,12 +1,13 @@
 <div class="card">
     <div class="card-heading border bottom">
         <h4 class="card-title">
-            Account
+            <span>Account</span>
             <a
                 *ngIf="max"
                 class="lnr lnr-expand expand-button"
                 [routerLink]="['account']"
             ></a>
+
             <a
                 *ngIf="!max"
                 class="lnr lnr-contract expand-button"
@@ -27,6 +28,37 @@
             >
                 <i class="icon lnr lnr-credit-card"></i>
                 <span class="title">Make a Payment</span>
+            </div>
+        </div>
+        <div class="overview" *ngIf="!max">
+            <div class="row">
+                <div class="col-4 col-md-3 order-1">Statement:</div>
+                <div class="col-12 col-md-6 order-3 order-md-2">
+                    <div class="statement-date">
+                        Start Date:
+                        <app-datepicker
+                            [date]="statementStart"
+                            (changed)="onStartChanged($event)"
+                        ></app-datepicker>
+                    </div>
+                    <div class="statement-date">
+                        End Date:
+                        <app-datepicker
+                            [date]="statementEnd"
+                            (changed)="onEndChanged($event)"
+                        ></app-datepicker>
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-3 order-2">
+                    <div
+                        class="btn btn-sm btn-outline-primary statement"
+                        (click)="genStatement()"
+                    >
+                        <i class="icon lnr lnr-printer"></i>
+                        <span class="title">View / Print</span>
+                    </div>
+                </div>
             </div>
         </div>
 

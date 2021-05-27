@@ -21,6 +21,12 @@
     float: left;
 }
 
+.dtrange {
+    font-size: 1.3em;
+    padding: 1.2em 0px;
+    float: right;
+}
+
 .balance {
     font-size: 1.3em;
     padding: 1.2em 0px;

@@ -3,7 +3,7 @@ import { UserService, User } from 'src/app/user/user.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { PaymentComponent } from '../payment/payment.component';
 
@@ -27,13 +27,19 @@ export class AccountComponent implements OnInit, OnDestroy {
     accounts: Account[] = [];
     balance: number;
 
+    statementStart: moment.Moment;
+    statementEnd: moment.Moment;
+
+    isCFI = false;
+
     private subs: Subscription[] = [];
 
     constructor(
         private userService: UserService,
         private location: Location,
         private route: ActivatedRoute,
-        private modalService: BsModalService
+        private modalService: BsModalService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -43,6 +49,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             this.subs.push(
                 this.userService.currentUser.subscribe((u) => {
                     if (u.groups.includes('Flight Instructor')) {
+                        this.isCFI = true;
                         this.route.params.subscribe((params: Params) => {
                             if (params.id) {
                                 const id = Number(params.id);
@@ -65,6 +72,8 @@ export class AccountComponent implements OnInit, OnDestroy {
                 })
             );
         }
+        this.statementStart = moment();
+        this.statementEnd = moment();
     }
 
     ngOnDestroy(): void {
@@ -137,5 +146,28 @@ export class AccountComponent implements OnInit, OnDestroy {
             }
             pmntRef.hide();
         });
+    }
+
+    onStartChanged(m: moment.Moment) {
+        this.statementStart = m;
+    }
+
+    onEndChanged(m: moment.Moment) {
+        this.statementEnd = m;
+    }
+
+    genStatement() {
+        const id = this.user.id;
+        const queryParams = {
+            s: this.statementStart.format('YYYY-MM-DD'),
+            e: this.statementEnd.format('YYYY-MM-DD'),
+        };
+        if (this.isCFI) {
+            this.router.navigate(['/profile/' + id.toString() + '/statement'], {
+                queryParams,
+            });
+        } else {
+            this.router.navigate(['/profile/statement'], { queryParams });
+        }
     }
 }
